@@ -43,15 +43,14 @@
 
 -(void) testFeatured {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         SongsAPI *songsAPI = [self.humm songs];
         
-        [self.humm updateUserToken];
         
         NSInteger limit = 5;
         NSInteger offset = 0;
@@ -86,16 +85,14 @@
 
 -(void) testPopular {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         SongsAPI *songsAPI = [self.humm songs];
-        
-        [self.humm updateUserToken];
-        
+                
         NSInteger limit = 5;
         NSInteger offset = 0;
         NSString *genre = nil;
@@ -130,15 +127,14 @@
 
 -(void) testRecent {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         SongsAPI *songsAPI = [self.humm songs];
         
-        [self.humm updateUserToken];
         
         NSInteger limit = 5;
         NSInteger offset = 0;
@@ -172,18 +168,17 @@
 
 -(void) testAppearsin {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         SongsAPI *songsAPI = [self.humm songs];
         
-        [self.humm updateUserToken];
         
         NSInteger limit = 1;
-        NSString *idSong = @"557ecbf86a64fc1b8bed533f"; //song2
+        NSString *idSong = @"56403fd834017507dba11880"; //song2
         
         [songsAPI appearsIn:idSong limit:limit
                           success:^(NSArray<Playlist *> *response) {
@@ -213,16 +208,14 @@
 
 -(void) testGet {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         SongsAPI *songsAPI = [self.humm songs];
-        
-        [self.humm updateUserToken];
-        
+                
         NSString *idSong = @"557ecbf86a64fc1b8bed533f"; //song2
         
         [songsAPI get:idSong 
@@ -253,15 +246,14 @@
 
 -(void) testGetSimilar {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         SongsAPI *songsAPI = [self.humm songs];
         
-        [self.humm updateUserToken];
         
         NSString *idSong = @"557ecbf86a64fc1b8bed533f"; //song2
         NSInteger limit = 5;

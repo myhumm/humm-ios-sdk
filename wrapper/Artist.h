@@ -11,6 +11,7 @@
 
 @interface Artist : JSONModel
 
+@property (nonatomic, strong) NSString *_id;
 @property (nonatomic, strong) NSArray *moods;
 @property (nonatomic, strong) NSArray *similar;
 @property (nonatomic, strong) NSDictionary *account;

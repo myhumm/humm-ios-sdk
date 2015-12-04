@@ -53,9 +53,7 @@
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         PlaylistsAPI *playlistAPI = [self.humm playlists];
-        
-        [self.humm updateUserToken];
-        
+                
         NSString *title = @"playlist title";
         NSString *description = @"playlist description";
         BOOL private = NO;
@@ -96,9 +94,7 @@
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         PlaylistsAPI *playlistAPI = [self.humm playlists];
-        
-        [self.humm updateUserToken];
-        
+                
         NSInteger limit = 1;
         NSInteger offset = 0;
         [playlistAPI getFeaturedWithLimit:limit offset:offset
@@ -129,8 +125,8 @@
 
 -(void) testGet {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -177,14 +173,14 @@
         PlaylistsAPI *playlistAPI = [self.humm playlists];
         
         
-        NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
+        NSString *idPlaylist = @"565f32f298cd5758490cc24d";
         NSString *title = @"title updated";
         NSString *description = @"description updated";
         BOOL private = NO;
         
         [playlistAPI update:idPlaylist description:description private:private title:title
                     success:^(Playlist *response) {
-                        XCTAssertEqualObjects(@"description", response.title);
+                        XCTAssertEqualObjects(@"title updated", response.title);
                         [expectation fulfill];
                     } error:^(NSError *error) {
                         //                        NSLog(@"error = %@", [error localizedDescription]);
@@ -207,8 +203,8 @@
 
 -(void) testOrder {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -257,8 +253,8 @@
 
 -(void) testGetSongs {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -294,8 +290,8 @@
 
 -(void) testAddSong {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -303,9 +299,9 @@
         PlaylistsAPI *playlistAPI = [self.humm playlists];
         
         
-        NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
-        NSInteger position = 0;
-        NSString *idSong = @"54d2be65ae8c5003198baa38";
+        NSString *idPlaylist = @"565f32f298cd5758490cc24d";
+        NSInteger position = 1;
+        NSString *idSong = @"56403fd834017507dba11880";
         [playlistAPI addSong:idPlaylist position:position idSong:idSong
                      success:^(Playlist *response) {
                          XCTAssertEqualObjects(@"Bustin' + Dronin'", response.title);
@@ -332,8 +328,8 @@
 
 -(void) testRemoveSong {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -341,9 +337,9 @@
         PlaylistsAPI *playlistAPI = [self.humm playlists];
         
         
-        NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
+        NSString *idPlaylist = @"565f32f298cd5758490cc24d";
         
-        NSString *idSong = @"54d2be65ae8c5003198baa38";
+        NSString *idSong = @"56403fd834017507dba11880";
         [playlistAPI removeSong:idPlaylist idSong:idSong
                         success:^(Playlist *response) {
                             XCTAssertEqualObjects(@"Bustin' + Dronin'", response.title);
@@ -369,8 +365,8 @@
 
 -(void) testAddSubscriber {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -405,8 +401,8 @@
 
 -(void) testRemoveSubscriber {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -442,8 +438,8 @@
 
 -(void) testGetPopular {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -480,8 +476,8 @@
 
 -(void) testRecent {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
@@ -516,8 +512,8 @@
 
 -(void) testSearch {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     

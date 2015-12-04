@@ -37,6 +37,8 @@
        success:(void (^) (Playlist *response)) success
          error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -51,12 +53,14 @@
     
     [parameters setObject:description forKey:@"description"];
     [parameters setObject:title forKey:@"title"];
-
+    
     [parameters setObject:[NSNumber numberWithBool:private] forKey:@"private"];
     
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
     
-    [manager POST:[NSString stringWithFormat:@"%@/playlists", self.humm.endPoint]
+    NSString *url = [NSString stringWithFormat:@"%@/playlists?title=%@&description=%@&private=%@", self.humm.endPoint, title, description, private ? @"true" : @"false"];
+    
+    [manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -89,6 +93,8 @@
                      success:(void (^) (NSArray<Playlist *> *response)) success
                        error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -229,31 +235,35 @@
     
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
     
-    [manager PATCH:[NSString stringWithFormat:@"%@/playlists/%@", self.humm.endPoint, idPlaylist]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 
-                 NSError *err;
-                 Playlist *playlist = [[Playlist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
-                 
-                 if (err)
-                 {
-                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
-                 }
-                 
-                 success(playlist);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/playlists/%@?title=%@&description=%@&private=%@", self.humm.endPoint, idPlaylist, title, description, private ? @"true" : @"false"];
+    
+    
+    [manager PATCH:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
+        parameters:parameters
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               
+               if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+               {
+                   
+                   NSError *err;
+                   Playlist *playlist = [[Playlist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                   
+                   if (err)
+                   {
+                       error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+                   }
+                   
+                   success(playlist);
+               }
+               else {
+                   error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+               }
+               
+           } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+               NSLog(@"error = %@", [e localizedDescription]);
+               error(e);
+           }];
     
 }
 
@@ -284,37 +294,37 @@
     [parameters setObject:songs forKey:@"songs"];
     
     [manager PATCH:[NSString stringWithFormat:@"%@/playlists/%@/reorder", self.humm.endPoint, idPlaylist]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if (!responseObject)
-             {
-                 success (nil);
-                 return ;
-             }
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 
-                 NSError *err;
-                 
-                 Playlist *playlist = [[Playlist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
-                 
-                 if (err)
-                 {
-                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
-                 }
-                 
-                 success(playlist);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+        parameters:parameters
+           success:^(AFHTTPRequestOperation *operation, id responseObject) {
+               
+               if (!responseObject)
+               {
+                   success (nil);
+                   return ;
+               }
+               
+               if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+               {
+                   
+                   NSError *err;
+                   
+                   Playlist *playlist = [[Playlist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                   
+                   if (err)
+                   {
+                       error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+                   }
+                   
+                   success(playlist);
+               }
+               else {
+                   error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+               }
+               
+           } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+               NSLog(@"error = %@", [e localizedDescription]);
+               error(e);
+           }];
     
 }
 
@@ -478,7 +488,6 @@
     }
     
     [parameters setObject:idSong forKey:@"sid"];
-    
     [manager DELETE:[NSString stringWithFormat:@"%@/playlists/%@/songs", self.humm.endPoint, idPlaylist]
          parameters:parameters
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -515,8 +524,8 @@
 }
 
 -(void) addSubscriber:(NSString *) idPlaylist
-        success:(void (^) (Playlist *response)) success
-          error:(void (^) (NSError *error)) error
+              success:(void (^) (Playlist *response)) success
+                error:(void (^) (NSError *error)) error
 {
     
     
@@ -573,8 +582,8 @@
 }
 
 -(void) removeSubscriber:(NSString *) idPlaylist
-           success:(void (^) (Playlist *response)) success
-             error:(void (^) (NSError *error)) error
+                 success:(void (^) (Playlist *response)) success
+                   error:(void (^) (NSError *error)) error
 {
     
     
@@ -593,7 +602,7 @@
     {
         error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
     }
-        
+    
     [manager DELETE:[NSString stringWithFormat:@"%@/playlists/%@/subscribers", self.humm.endPoint, idPlaylist]
          parameters:parameters
             success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -630,11 +639,11 @@
 }
 
 -(void) getPopularWithLimit:(NSInteger) limit
-          offset:(NSInteger) offset
+                     offset:(NSInteger) offset
                   selection:(NSString *)selection
                      idUser:(NSString *) idUser
-         success:(void (^) (NSArray<Playlist *> *response)) success
-           error:(void (^) (NSError *error)) error
+                    success:(void (^) (NSArray<Playlist *> *response)) success
+                      error:(void (^) (NSError *error)) error
 {
     
     
@@ -706,9 +715,9 @@
 }
 
 -(void) getRecentWithLimit:(NSInteger) limit
-                     offset:(NSInteger) offset
-                    success:(void (^) (NSArray<Playlist *> *response)) success
-                      error:(void (^) (NSError *error)) error
+                    offset:(NSInteger) offset
+                   success:(void (^) (NSArray<Playlist *> *response)) success
+                     error:(void (^) (NSError *error)) error
 {
     
     
@@ -771,10 +780,10 @@
 
 -(void) searchWithKeyword:(NSString *) keyword
                     limit:(NSInteger) limit
-                    offset:(NSInteger) offset
+                   offset:(NSInteger) offset
                     album:(BOOL) album
-                   success:(void (^) (NSArray<Playlist *> *response)) success
-                     error:(void (^) (NSError *error)) error
+                  success:(void (^) (NSArray<Playlist *> *response)) success
+                    error:(void (^) (NSError *error)) error
 {
     
     
@@ -793,9 +802,9 @@
     {
         error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
     }
-
+    
     [parameters setObject:keyword forKey:@"keyword"];
-
+    
     if (limit > 0)
     {
         [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
@@ -807,7 +816,7 @@
     }
     
     [parameters setObject:[NSNumber numberWithBool:album] forKey:@"album"];
-
+    
     [manager GET:[NSString stringWithFormat:@"%@/playlists", self.humm.endPoint]
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {

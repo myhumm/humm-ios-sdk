@@ -43,8 +43,8 @@
 
 -(void) testRadio {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     

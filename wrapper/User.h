@@ -11,6 +11,8 @@
 
 @interface User : JSONModel
 
+@property (nonatomic, strong) NSString *_id;
+
 @property (nonatomic, strong) NSDictionary *account;
 @property (nonatomic, strong) NSDictionary *preferences;
 @property (nonatomic, strong) NSString *signup;

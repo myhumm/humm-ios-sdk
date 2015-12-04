@@ -39,6 +39,8 @@
                      success:(void (^) (NSArray<Song *> *response)) success
                        error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -96,6 +98,8 @@
                      success:(void (^) (NSArray<Song *> *response)) success
                        error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -153,6 +157,8 @@
                  success:(void (^) (NSArray<Song *> *response)) success
                    error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -209,6 +215,8 @@
                 success:(void (^) (NSArray<Playlist *> *response)) success
                   error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -260,6 +268,8 @@
           success:(void (^) ( Song *response)) success
             error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -309,6 +319,8 @@
     success:(void (^) ( NSArray<Song *>  *response)) success
       error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

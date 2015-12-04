@@ -97,7 +97,10 @@
                   lastName, @"last_name",
                   nil];
     
-    [manager POST:[NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint]
+    NSString *url = [NSString stringWithFormat:@"%@/users/signup?username=%@&password=%@&email=%@&firstname=%@&lastname=%@", self.humm.endPoint, username, password, email, firstName, lastName];
+         [manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
+
+//    [manager POST:[NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint]
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -202,6 +205,8 @@
                           success:(void (^) (NSArray<Playlist *> *response)) success
                             error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -248,6 +253,8 @@
                          success:(void (^) (NSArray<Artist *> *response)) success
                            error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -294,6 +301,8 @@
                            success:(void (^) (NSArray<Playlist *> *response)) success
                              error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -339,6 +348,8 @@
               success:(void (^) (Song *response)) success
                 error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -388,6 +399,8 @@
              success:(void (^) (User *response)) success
                error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -436,6 +449,8 @@
                 success:(void (^) (User *response)) success
                   error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -482,6 +497,8 @@
                 success:(void (^) (User *response)) success
                   error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -589,6 +606,9 @@
               success:(void (^) (NSArray<User *> *response)) success
                 error:(void (^) (NSError *error)) error
 {
+    
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -648,6 +668,8 @@
              success:(void (^) (NSArray<Playlist *> *response)) success
                error:(void (^) (NSError *error)) error
 {
+    [self.humm updateUserToken];
+
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

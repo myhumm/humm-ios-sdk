@@ -67,9 +67,9 @@
     }];
 }
 -(void) testSignup {
-    NSString *username = @"deletemeIos";
-    NSString *password = @"deletemeIos";
-    NSString *email = @"deletemeIos@ios.com";
+    NSString *username = @"deletemeIos2";
+    NSString *password = @"deletemeIos2";
+    NSString *email = @"deletemeIos2@ios2.com";
     NSString *firstName = @"delete";
     NSString *lastName = @"me";
     
@@ -134,15 +134,14 @@
 
 -(void) testDiscoverReleases {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
         
         NSInteger limit = 5;
         NSInteger offset = 0;
@@ -176,15 +175,14 @@
 
 -(void) testDiscoverArtists {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
         
         NSInteger limit = 5;
         NSInteger offset = 0;
@@ -218,15 +216,14 @@
 
 -(void) testDiscoverPlaylists {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
         
         NSInteger limit = 5;
         NSInteger offset = 0;
@@ -260,15 +257,14 @@
 
 -(void) testAddFavourite {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
         
         NSString *idSong =@"557ecbf86a64fc1b8bed533f";
         
@@ -302,29 +298,27 @@
 
 -(void) testAddFollows {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
-        
-        NSString *idUser =@"5649c572ae8c502824a46a99"; //user1
+        NSString *idUser =@"565f15eeae8c506937ebf1f6"; //user1
         
         [usersApi addFollows:idUser
-                       success:^(User *response) {
-                           
-                           XCTAssertEqualObjects(@"user1", response.getUsername);
-                           
-                           [expectation fulfill];
-                       }
-                         error:^(NSError *error) {
-                             NSLog(@"error = %@", [error localizedDescription]);
-                             XCTAssertFalse(YES);
-                         }];
+                     success:^(User *response) {
+                         
+                         XCTAssertEqualObjects(@"user1", response.getUsername);
+                         
+                         [expectation fulfill];
+                     }
+                       error:^(NSError *error) {
+                           NSLog(@"error = %@", [error localizedDescription]);
+                           XCTAssertFalse(YES);
+                       }];
         
     } onLoginError:^(NSError *error) {
         XCTAssertFalse(YES);
@@ -343,29 +337,27 @@
 
 -(void) testRemoveFollows {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
-        
-        NSString *idUser =@"5649c572ae8c502824a46a99"; //user1
+        NSString *idUser =@"565f15eeae8c506937ebf1f6"; //user1
         
         [usersApi removeFollows:idUser
-                          success:^(User *response) {
-                              
-                              XCTAssertEqualObjects(@"user1", response.getUsername);
-                              
-                              [expectation fulfill];
-                          }
-                            error:^(NSError *error) {
-                                NSLog(@"error = %@", [error localizedDescription]);
-                                XCTAssertFalse(YES);
-                            }];
+                        success:^(User *response) {
+                            
+                            XCTAssertEqualObjects(@"deleteme100", response.getUsername);
+                            
+                            [expectation fulfill];
+                        }
+                          error:^(NSError *error) {
+                              NSLog(@"error = %@", [error localizedDescription]);
+                              XCTAssertFalse(YES);
+                          }];
         
     } onLoginError:^(NSError *error) {
         XCTAssertFalse(YES);
@@ -384,15 +376,14 @@
 
 -(void) testGetUser {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
         
         NSString *idUser =@"5649c572ae8c502824a46a99"; //user1
         
@@ -423,74 +414,73 @@
     
 }
 
--(void) testGetFavourites {
-    
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
-    
-    [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        UserAPI *usersApi = [self.humm users];
-        
-        [self.humm updateUserToken];
-        
-        NSString *idUser =@"5649c572ae8c502824a46a99"; //user1
-        NSInteger limit = 5;
-        NSInteger offset = 0;
-        [usersApi getFavourites:idUser limit:limit offset:offset
-              success:^(NSArray<Song *> *response) {
-                  
-                  XCTAssertTrue(response.count == limit);
-                  
-                  [expectation fulfill];
-              }
-                error:^(NSError *error) {
-                    NSLog(@"error = %@", [error localizedDescription]);
-                    XCTAssertFalse(YES);
-                }];
-        
-    } onLoginError:^(NSError *error) {
-        XCTAssertFalse(YES);
-    }];
-    
-    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
-        if(error)
-        {
-            XCTFail(@"Expectation Failed with error: %@", error);
-        }
-        
-    }];
-    
-    
-}
+//-(void) testGetFavourites {
+//
+//    NSString *username = @"deleteme100";
+//    NSString *password = @"deleteme100";
+//
+//    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+//
+//    [self.humm loginWithUsername:username password:password onLoginSuccess:^{
+//        UserAPI *usersApi = [self.humm users];
+//
+//        [self.humm updateUserToken];
+//
+//        NSString *idUser =@"5649c572ae8c502824a46a99"; //user1
+//        NSInteger limit = 5;
+//        NSInteger offset = 0;
+//        [usersApi getFavourites:idUser limit:limit offset:offset
+//              success:^(NSArray<Song *> *response) {
+//
+//                  XCTAssertTrue(response.count == limit);
+//
+//                  [expectation fulfill];
+//              }
+//                error:^(NSError *error) {
+//                    NSLog(@"error = %@", [error localizedDescription]);
+//                    XCTAssertFalse(YES);
+//                }];
+//
+//    } onLoginError:^(NSError *error) {
+//        XCTAssertFalse(YES);
+//    }];
+//
+//    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+//        if(error)
+//        {
+//            XCTFail(@"Expectation Failed with error: %@", error);
+//        }
+//
+//    }];
+//
+//
+//}
 
 -(void) testGetFollows {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
         
         NSString *idUser =@"5649c572ae8c502824a46a99"; //user1
         NSInteger limit = 1;
         NSInteger offset = 0;
         [usersApi getFollows:idUser limit:limit offset:offset
-                        success:^(NSArray<User *> *response) {
-                            
-                            XCTAssertTrue(response.count == limit);
-                            
-                            [expectation fulfill];
-                        }
-                          error:^(NSError *error) {
-                              NSLog(@"error = %@", [error localizedDescription]);
-                              XCTAssertFalse(YES);
-                          }];
+                     success:^(NSArray<User *> *response) {
+                         
+                         XCTAssertTrue(response.count == limit);
+                         
+                         [expectation fulfill];
+                     }
+                       error:^(NSError *error) {
+                           NSLog(@"error = %@", [error localizedDescription]);
+                           XCTAssertFalse(YES);
+                       }];
         
     } onLoginError:^(NSError *error) {
         XCTAssertFalse(YES);
@@ -509,17 +499,16 @@
 
 -(void) testGetPlaylists {
     
-    NSString *username = @"deleteme";
-    NSString *password = @"deleteme";
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         UserAPI *usersApi = [self.humm users];
         
-        [self.humm updateUserToken];
         
-        NSString *idUser =@"5649c572ae8c502824a46a99"; //user1
+        NSString *idUser =@"565f15eeae8c506937ebf1f6"; //user1
         NSInteger limit = 5;
         NSInteger offset = 0;
         [usersApi getPlaylists:idUser limit:limit offset:offset

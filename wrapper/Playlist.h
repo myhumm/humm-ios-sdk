@@ -11,6 +11,8 @@
 
 @interface Playlist : JSONModel
 
+@property (nonatomic, strong) NSString *_id;
+
 @property (nonatomic, strong) NSDictionary *stats;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSArray *contributors;
