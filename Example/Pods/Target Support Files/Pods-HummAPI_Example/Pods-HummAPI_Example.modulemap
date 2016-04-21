@@ -1,0 +1,6 @@
+framework module Pods_HummAPI_Example {
+  umbrella header "Pods-HummAPI_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

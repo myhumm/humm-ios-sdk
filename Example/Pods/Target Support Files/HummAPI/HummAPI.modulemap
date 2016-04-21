@@ -1,0 +1,6 @@
+framework module HummAPI {
+  umbrella header "HummAPI-umbrella.h"
+
+  export *
+  module * { export * }
+}

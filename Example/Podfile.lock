@@ -1,0 +1,46 @@
+PODS:
+  - AFNetworking (2.6.3):
+    - AFNetworking/NSURLConnection (= 2.6.3)
+    - AFNetworking/NSURLSession (= 2.6.3)
+    - AFNetworking/Reachability (= 2.6.3)
+    - AFNetworking/Security (= 2.6.3)
+    - AFNetworking/Serialization (= 2.6.3)
+    - AFNetworking/UIKit (= 2.6.3)
+  - AFNetworking/NSURLConnection (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.6.3):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.6.3)
+  - AFNetworking/Security (2.6.3)
+  - AFNetworking/Serialization (2.6.3)
+  - AFNetworking/UIKit (2.6.3):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Expecta (1.0.5)
+  - HummAPI (0.1.0)
+  - JSONModel (1.2.0)
+  - Specta (1.0.5)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5)
+  - Expecta
+  - HummAPI (from `../`)
+  - JSONModel
+  - Specta
+
+EXTERNAL SOURCES:
+  HummAPI:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
+  Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  HummAPI: b9ed5d726db200c2afc29610b3df359695b067f2
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
+
+COCOAPODS: 0.39.0
