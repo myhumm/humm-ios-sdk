@@ -24,9 +24,11 @@
         sharedMyManager.grantType = @"password";
         sharedMyManager.clientId = @"5433be703acd3952a3e9ec28";
         sharedMyManager.token_expires = 0;
+        sharedMyManager.MODE_DEBUG = NO;
     });
     return sharedMyManager;
 }
+
 
 -(void) loginWithUsername:(NSString *) username
                  password:(NSString *) password
@@ -46,6 +48,7 @@
                      email: (NSString *) email
                  firstName: (NSString *) firstName
                   lastName:(NSString *) lastName
+                   referal:(NSString *) referal
             onLoginSuccess:(void (^) (void)) loginSuccess
               onLoginError:(void (^) (NSError *error)) loginError
 {
@@ -57,13 +60,19 @@
     }];
 }
 
--(void) updateUserToken
+-(void) updateUserToken:(void (^) (void)) updatedSuccess
+         onUpdatedError:(void (^) (NSError *error)) updatedError
+
 {
     NSDate *date = [NSDate date];
-    NSInteger seconds = [date timeIntervalSince1970];
-
-//    NSLog(@"seconds = %ld", (long)seconds);
-//    NSLog(@"self.token_expires = %ld", (long)self.token_expires);
+    NSInteger seconds = [date timeIntervalSinceReferenceDate];
+    
+    if (self.MODE_DEBUG)
+    {
+        NSLog(@"seconds now = %ld", (long)seconds);
+        NSLog(@"token expires = %ld", (long)self.token_expires);
+        
+    }
     if (seconds < self.token_expires) {
         //user is loged
         if (self.token) {
@@ -71,14 +80,15 @@
         }
     }
     
-    //TODO: test
-
+    
     [[self users] refreshToken:^(LoginInfo *response) {
         [self updateLoginDataWithLoginInfo:(response)];
+        updatedSuccess();
     } error:^(NSError *error) {
+        updatedError(error);
     }];
-
-
+    
+    
     
 }
 
@@ -100,9 +110,18 @@
 
 -(void) updateLoginDataWithLoginInfo:(LoginInfo *) loginInfo
 {
+    if (self.MODE_DEBUG)
+    {
+        NSLog(@"%@" , loginInfo);
+    }
+    
     self.token = loginInfo.access_token;
     self.refresh_token = loginInfo.refresh_token;
-    self.token_expires = loginInfo.expires_in;
+    
+    NSDate *date = [NSDate date];
+    NSInteger seconds = [date timeIntervalSinceReferenceDate];
+    
+    self.token_expires = seconds + loginInfo.expires_in;
 }
 
 - (UserAPI *) users {

@@ -29,6 +29,7 @@
 @property (nonatomic, strong) SongsAPI *songs;
 @property (nonatomic, strong) PlaylistsAPI *playlists;
 
+@property (nonatomic, assign, getter=isDebug) BOOL MODE_DEBUG;
 
 -(void) loginWithUsername:(NSString *) username
                  password:(NSString *) password
@@ -53,6 +54,8 @@
 
 
 + (id)sharedManager;
--(void) updateUserToken;
+
+-(void) updateUserToken:(void (^) (void)) updatedSuccess
+         onUpdatedError:(void (^) (NSError *error)) updatedError;
 
 @end

@@ -141,6 +141,14 @@
 		A30FF6C11CC8EF5100845C39 /* JSONModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FB33B62093AF37CFD40A8F /* JSONModel.framework */; };
 		A3945FC009865B0F73380BF4 /* EXPMatchers+beFalsy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F052D4419948421C817B5FF /* EXPMatchers+beFalsy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3B0026CB6B42EA4A452C5B8 /* JSONModelArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE61BF33DD0633D9325A63D /* JSONModelArray.m */; };
+		A3FA15BC1CD8F90C0066E9C0 /* HummAPI_UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15BB1CD8F90C0066E9C0 /* HummAPI_UnitTests.m */; };
+		A3FA15BE1CD8F90C0066E9C0 /* HummAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8541CEC78A0AB677ABF3DD32 /* HummAPI.framework */; };
+		A3FA15CA1CD8F97E0066E9C0 /* ArtistTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15C41CD8F97E0066E9C0 /* ArtistTest.m */; };
+		A3FA15CB1CD8F97E0066E9C0 /* OthersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15C51CD8F97E0066E9C0 /* OthersTests.m */; };
+		A3FA15CC1CD8F97E0066E9C0 /* PlaylistsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15C61CD8F97E0066E9C0 /* PlaylistsTest.m */; };
+		A3FA15CD1CD8F97F0066E9C0 /* SongsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15C71CD8F97E0066E9C0 /* SongsTest.m */; };
+		A3FA15CE1CD8F97F0066E9C0 /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15C81CD8F97E0066E9C0 /* Tests.m */; };
+		A3FA15CF1CD8F97F0066E9C0 /* UserTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15C91CD8F97E0066E9C0 /* UserTest.m */; };
 		A47FC4773555771A8FE2AFB9 /* SongsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CC31EEB516FEE51D6E59C6BF /* SongsAPI.m */; };
 		A51E48DD9C9DEA613EAAE215 /* SPTExampleGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C12A75C8AEB1C81DAC6FC82 /* SPTExampleGroup.m */; };
 		A6F913B426CBFD1C53586C9D /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = B963BED89B8D2B0CF01D74DD /* Playlist.m */; };
@@ -249,6 +257,13 @@
 			remoteInfo = Expecta;
 		};
 		A2DBBB6994B2783B85BEB833 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B588B6F50695AC5C51FEF359 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B59291BFEB0E4BEC0595C2F7;
+			remoteInfo = HummAPI;
+		};
+		A3FA15BF1CD8F90C0066E9C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B588B6F50695AC5C51FEF359 /* Project object */;
 			proxyType = 1;
@@ -442,6 +457,15 @@
 		9B35F05BBBE3A027F07777D3 /* LoginInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LoginInfo.h; sourceTree = "<group>"; };
 		A17AC2DCA0C684B384A164BE /* EXPMatchers+beFalsy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beFalsy.h"; path = "Expecta/Matchers/EXPMatchers+beFalsy.h"; sourceTree = "<group>"; };
 		A353495AF644F350C8AFEA1C /* JSONValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONValueTransformer.m; path = JSONModel/JSONModelTransformations/JSONValueTransformer.m; sourceTree = "<group>"; };
+		A3FA15B91CD8F90B0066E9C0 /* HummAPI_UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HummAPI_UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3FA15BB1CD8F90C0066E9C0 /* HummAPI_UnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HummAPI_UnitTests.m; sourceTree = "<group>"; };
+		A3FA15BD1CD8F90C0066E9C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3FA15C41CD8F97E0066E9C0 /* ArtistTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtistTest.m; sourceTree = "<group>"; };
+		A3FA15C51CD8F97E0066E9C0 /* OthersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OthersTests.m; sourceTree = "<group>"; };
+		A3FA15C61CD8F97E0066E9C0 /* PlaylistsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistsTest.m; sourceTree = "<group>"; };
+		A3FA15C71CD8F97E0066E9C0 /* SongsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SongsTest.m; sourceTree = "<group>"; };
+		A3FA15C81CD8F97E0066E9C0 /* Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
+		A3FA15C91CD8F97E0066E9C0 /* UserTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTest.m; sourceTree = "<group>"; };
 		A400F13CD60202F971A98733 /* Song.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
 		A48739C2153BBB8BD39DDC92 /* UIAlertView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIAlertView+AFNetworking.m"; path = "UIKit+AFNetworking/UIAlertView+AFNetworking.m"; sourceTree = "<group>"; };
 		A4C89A1671710301B532882B /* EXPMatchers+haveCountOf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+haveCountOf.h"; path = "Expecta/Matchers/EXPMatchers+haveCountOf.h"; sourceTree = "<group>"; };
@@ -590,6 +614,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A3FA15B61CD8F90B0066E9C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3FA15BE1CD8F90C0066E9C0 /* HummAPI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E8355DE9CCE41963C50EC08B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -643,6 +675,7 @@
 				08154B9C77171795CD40288E /* Pods_HummAPI_Example.framework */,
 				1F2F20DC47F248EF5E434737 /* Pods_HummAPI_Tests.framework */,
 				57B8810C07D7B6CE48A29B87 /* Specta.framework */,
+				A3FA15B91CD8F90B0066E9C0 /* HummAPI_UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -968,6 +1001,21 @@
 			path = Specta;
 			sourceTree = "<group>";
 		};
+		A3FA15BA1CD8F90B0066E9C0 /* HummAPI_UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				A3FA15C41CD8F97E0066E9C0 /* ArtistTest.m */,
+				A3FA15C51CD8F97E0066E9C0 /* OthersTests.m */,
+				A3FA15C61CD8F97E0066E9C0 /* PlaylistsTest.m */,
+				A3FA15C71CD8F97E0066E9C0 /* SongsTest.m */,
+				A3FA15C81CD8F97E0066E9C0 /* Tests.m */,
+				A3FA15C91CD8F97E0066E9C0 /* UserTest.m */,
+				A3FA15BB1CD8F90C0066E9C0 /* HummAPI_UnitTests.m */,
+				A3FA15BD1CD8F90C0066E9C0 /* Info.plist */,
+			);
+			path = HummAPI_UnitTests;
+			sourceTree = "<group>";
+		};
 		B56A0317D442DB2E39C090AF /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1029,6 +1077,7 @@
 			children = (
 				57C9616833D6654524730601 /* Podfile */,
 				D24E4D87319F29DA3575713A /* Development Pods */,
+				A3FA15BA1CD8F90B0066E9C0 /* HummAPI_UnitTests */,
 				B63233572FCDC8F23532C9E3 /* Frameworks */,
 				D022D16AA2D8B7C0050A2BEA /* Pods */,
 				197EB0577CCB3F123420CE62 /* Products */,
@@ -1360,6 +1409,24 @@
 			productReference = 79FB33B62093AF37CFD40A8F /* JSONModel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A3FA15B81CD8F90B0066E9C0 /* HummAPI_UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3FA15C31CD8F90C0066E9C0 /* Build configuration list for PBXNativeTarget "HummAPI_UnitTests" */;
+			buildPhases = (
+				A3FA15B51CD8F90B0066E9C0 /* Sources */,
+				A3FA15B61CD8F90B0066E9C0 /* Frameworks */,
+				A3FA15B71CD8F90B0066E9C0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A3FA15C01CD8F90C0066E9C0 /* PBXTargetDependency */,
+			);
+			name = HummAPI_UnitTests;
+			productName = HummAPI_UnitTests;
+			productReference = A3FA15B91CD8F90B0066E9C0 /* HummAPI_UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		B59291BFEB0E4BEC0595C2F7 /* HummAPI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30FFB31CF7003C9E0E8A5C48 /* Build configuration list for PBXNativeTarget "HummAPI" */;
@@ -1404,6 +1471,11 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
+				TargetAttributes = {
+					A3FA15B81CD8F90B0066E9C0 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
 			};
 			buildConfigurationList = 08914299933E73E668F49466 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1425,6 +1497,7 @@
 				0ACE3B334ACB841E0D8C7E4A /* Pods-HummAPI_Example */,
 				4B0B35F42EDFF8A488B1E51F /* Pods-HummAPI_Tests */,
 				D58DED04DE7E84ABB84705C2 /* Specta */,
+				A3FA15B81CD8F90B0066E9C0 /* HummAPI_UnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1435,6 +1508,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CE1B4D7807C6A8D1DC03FE4 /* HummAPI.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3FA15B71CD8F90B0066E9C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1488,6 +1568,20 @@
 				F52818432BF2D8F20457F506 /* SPTSpec.m in Sources */,
 				DBD644B6A911F81868B23098 /* SPTTestSuite.m in Sources */,
 				E0A46299C6758105F4D0BDCE /* XCTestCase+Specta.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3FA15B51CD8F90B0066E9C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3FA15CD1CD8F97F0066E9C0 /* SongsTest.m in Sources */,
+				A3FA15CB1CD8F97E0066E9C0 /* OthersTests.m in Sources */,
+				A3FA15CF1CD8F97F0066E9C0 /* UserTest.m in Sources */,
+				A3FA15CA1CD8F97E0066E9C0 /* ArtistTest.m in Sources */,
+				A3FA15CE1CD8F97F0066E9C0 /* Tests.m in Sources */,
+				A3FA15BC1CD8F90C0066E9C0 /* HummAPI_UnitTests.m in Sources */,
+				A3FA15CC1CD8F97E0066E9C0 /* PlaylistsTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1620,6 +1714,11 @@
 			name = AFNetworking;
 			target = 85B82F53072B438436325414 /* AFNetworking */;
 			targetProxy = C2F21B8CE643471421C925D7 /* PBXContainerItemProxy */;
+		};
+		A3FA15C01CD8F90C0066E9C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B59291BFEB0E4BEC0595C2F7 /* HummAPI */;
+			targetProxy = A3FA15BF1CD8F90C0066E9C0 /* PBXContainerItemProxy */;
 		};
 		B45E5A7D939B2BFE49AC0374 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1908,6 +2007,52 @@
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
+		};
+		A3FA15C11CD8F90C0066E9C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = HummAPI_UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.livingindie.HummAPI-UnitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A3FA15C21CD8F90C0066E9C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = HummAPI_UnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.livingindie.HummAPI-UnitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
 		};
 		BAF7C95AF4D1E6BF066AF54E /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2215,6 +2360,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A3FA15C31CD8F90C0066E9C0 /* Build configuration list for PBXNativeTarget "HummAPI_UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3FA15C11CD8F90C0066E9C0 /* Debug */,
+				A3FA15C21CD8F90C0066E9C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		EF8AE8172D9C7D0C820D4951 /* Build configuration list for PBXNativeTarget "Specta" */ = {
 			isa = XCConfigurationList;

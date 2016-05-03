@@ -40,46 +40,53 @@
     success:(void (^) (Artist *response)) success
       error:(void (^) (NSError *error)) error
 {
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/%@", self.humm.endPoint, idArtist]
+          parameters:[parameters copy]
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                 {
+                     NSError* err = nil;
+                     Artist *artist = [[Artist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                     success(artist);
+                 }
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
     
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/%@", self.humm.endPoint, idArtist]
-      parameters:[parameters copy]
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError* err = nil;
-                 Artist *artist = [[Artist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
-                 success(artist);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
     
 }
 
@@ -88,33 +95,40 @@
               error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        [manager POST:[NSString stringWithFormat:@"%@/artists/%@/followers", self.humm.endPoint, idArtist]
+           parameters:nil
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  
+                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                  {
+                      NSError* err = nil;
+                      Artist *artist = [[Artist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                      success(artist);
+                  }
+                  else {
+                      error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                  }
+                  
+              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  NSLog(@"error = %@", [e localizedDescription]);
+                  error(e);
+              }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
     
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    [manager POST:[NSString stringWithFormat:@"%@/artists/%@/followers", self.humm.endPoint, idArtist]
-       parameters:nil
-          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
-              if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-              {
-                  NSError* err = nil;
-                  Artist *artist = [[Artist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
-                  success(artist);
-              }
-              else {
-                  error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-              }
-              
-          } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-              NSLog(@"error = %@", [e localizedDescription]);
-              error(e);
-          }];
     
 }
 
@@ -123,33 +137,40 @@
                  error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        [manager DELETE:[NSString stringWithFormat:@"%@/artists/%@/followers", self.humm.endPoint, idArtist]
+             parameters:nil
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    
+                    if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                    {
+                        NSError* err = nil;
+                        Artist *artist = [[Artist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                        success(artist);
+                    }
+                    else {
+                        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                    }
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                    NSLog(@"error = %@", [e localizedDescription]);
+                    error(e);
+                }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
     
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    [manager DELETE:[NSString stringWithFormat:@"%@/artists/%@/followers", self.humm.endPoint, idArtist]
-         parameters:nil
-            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-                {
-                    NSError* err = nil;
-                    Artist *artist = [[Artist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
-                    success(artist);
-                }
-                else {
-                    error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-                }
-                
-            } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-                NSLog(@"error = %@", [e localizedDescription]);
-                error(e);
-            }];
     
 }
 
@@ -160,52 +181,59 @@
                error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/%@/playlists", self.humm.endPoint, idArtist]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-                 NSArray<Playlist *> *playlists = [Playlist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/%@/playlists", self.humm.endPoint, idArtist]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     NSArray<Playlist *> *playlists = [Playlist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(playlists);
+                 }
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
                  }
                  
-                 success(playlists);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
+    
     
 }
 
@@ -216,53 +244,60 @@
            error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/%@/radio", self.humm.endPoint, idArtist]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-
-                 NSArray<Song *> *playlists = [Song arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/%@/radio", self.humm.endPoint, idArtist]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     
+                     NSArray<Song *> *playlists = [Song arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(playlists);
                  }
-
-                 success(playlists);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
+    
     
 }
 
@@ -273,52 +308,59 @@
              error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/%@/similar", self.humm.endPoint, idArtist]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-                 NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/%@/similar", self.humm.endPoint, idArtist]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(artists);
                  }
-
-                 success(artists);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
+    
     
 }
 
@@ -330,57 +372,64 @@
               error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    if (songType)
-    {
-        [parameters setObject:songType forKey:@"songType"];
-    }
-    
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/%@/topsongs", self.humm.endPoint, idArtist]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-                 NSArray<Song *> *songs = [Song arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        if (songType)
+        {
+            [parameters setObject:songType forKey:@"songType"];
+        }
+        
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/%@/topsongs", self.humm.endPoint, idArtist]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     NSArray<Song *> *songs = [Song arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(songs);
                  }
-
-                 success(songs);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
+    
     
 }
 
@@ -391,57 +440,64 @@
                        error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    if (genre)
-    {
-        [parameters setObject:genre forKey:@"genre"];
-    }
-    
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/featured", self.humm.endPoint]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-                 NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        if (genre)
+        {
+            [parameters setObject:genre forKey:@"genre"];
+        }
+        
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/featured", self.humm.endPoint]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(artists);
                  }
-
-                 success(artists);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
+    
     
 }
 
@@ -451,51 +507,58 @@
                       error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/popular", self.humm.endPoint]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-                 NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/popular", self.humm.endPoint]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(artists);
                  }
-
-                 success(artists);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
     
 }
 
@@ -505,51 +568,58 @@
             error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists/recent", self.humm.endPoint]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-                 NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists/recent", self.humm.endPoint]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(artists);
                  }
-
-                 success(artists);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
+    
     
 }
 
@@ -560,60 +630,67 @@
          error:(void (^) (NSError *error)) error
 {
     
-    [self.humm updateUserToken];
-
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer =[AFJSONResponseSerializer serializer];
-    
-    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
-    
-    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-    
-    if (!keyword)
-    {
-        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
-    }
-    else
-    {
-        [parameters setObject:keyword forKey:@"keyword"];
-    }
-    
-    if (limit > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
-    }
-    
-    if (offset > 0)
-    {
-        [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
-    }
-    
-    [manager GET:[NSString stringWithFormat:@"%@/artists", self.humm.endPoint]
-      parameters:parameters
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
-             if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-             {
-                 NSError *error;
-                 NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (!keyword)
+        {
+            error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+        }
+        else
+        {
+            [parameters setObject:keyword forKey:@"keyword"];
+        }
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        [manager GET:[NSString stringWithFormat:@"%@/artists", self.humm.endPoint]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 if (error)
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
-                     NSLog(@"Error = %@", [error localizedDescription]);
+                     NSError *error;
+                     NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&error];
+                     
+                     if (error)
+                     {
+                         NSLog(@"Error = %@", [error localizedDescription]);
+                     }
+                     
+                     success(artists);
                  }
-
-                 success(artists);
-             }
-             else {
-                 error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-             }
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-             NSLog(@"error = %@", [e localizedDescription]);
-             error(e);
-         }];
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    ;
+    
     
 }
 

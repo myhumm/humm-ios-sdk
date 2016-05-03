@@ -87,4 +87,8 @@
              success:(void (^) (NSArray<Playlist *> *response)) success
                error:(void (^) (NSError *error)) error;
 
+-(void) resetPassword: (NSString *) email
+              success:(void (^) (BOOL response)) success
+                error:(void (^) (NSError *error)) error;
+
 @end
