@@ -41,6 +41,7 @@
                      email: (NSString *) email
                  firstName: (NSString *) firstName
                   lastName:(NSString *) lastName
+                   referal:(NSString *) referal
             onLoginSuccess:(void (^) (void)) loginSuccess
               onLoginError:(void (^) (NSError *error)) loginError;
 
