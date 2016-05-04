@@ -11,10 +11,14 @@
 
 @interface User : JSONModel
 
+#define SERVICE_TWITTER @"twitter";
+#define SERVICE_FACEBOOK @"facebook";
+
 @property (nonatomic, strong) NSString *_id;
 
 @property (nonatomic, strong) NSDictionary *account;
 @property (nonatomic, strong) NSDictionary *preferences;
+@property (nonatomic, strong) NSDictionary *services;
 @property (nonatomic, strong) NSString *signup;
 @property (nonatomic, strong) NSString *last_visit;
 @property (nonatomic) BOOL featured;
@@ -37,4 +41,8 @@
 
 -(NSArray *) getPreferencesDislike;
 -(NSArray *) getPreferencesLike;
+
+-(NSDictionary *) getTwitterService;
+-(NSDictionary *) getFacebookService;
+
 @end

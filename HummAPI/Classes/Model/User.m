@@ -105,5 +105,25 @@
     
 }
 
+-(NSDictionary *) getTwitterService {
+    
+    if (self.services && self.services[@"twitter"])
+    {
+        return self.services[@"twitter"];
+    }
+    return nil;
+    
+}
+-(NSDictionary *) getFacebookService {
+    
+    if (self.services && self.services[@"facebook"])
+    {
+        return self.services[@"facebook"];
+    }
+    return nil;
+
+}
+
+
 
 @end
