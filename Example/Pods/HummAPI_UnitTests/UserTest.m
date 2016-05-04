@@ -566,5 +566,56 @@
 
 }
 
+-(void) testCheckEmail {
+    NSString *email = @"jose@neteleven.es";
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    self.humm.MODE_DEBUG = YES;
+    UserAPI *userAPI = [self.humm users];
+    
+    [userAPI checkEmail:email success:^(BOOL response) {
+        XCTAssertTrue (response);
+        [expectation fulfill];
+    } error:^(NSError *error) {
+        NSLog(@"error = %@", [error localizedDescription]);
+        XCTAssertFalse(YES);
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+    
+}
+
+-(void) testCheckUsername {
+    NSString *username = @"josealonso";
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    self.humm.MODE_DEBUG = YES;
+    UserAPI *userAPI = [self.humm users];
+    
+    [userAPI checkUsername:username success:^(BOOL response) {
+        XCTAssertTrue (response);
+        [expectation fulfill];
+    } error:^(NSError *error) {
+        NSLog(@"error = %@", [error localizedDescription]);
+        XCTAssertFalse(YES);
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+    
+}
 
 @end

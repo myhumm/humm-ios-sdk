@@ -91,4 +91,13 @@
               success:(void (^) (BOOL response)) success
                 error:(void (^) (NSError *error)) error;
 
+-(void) checkUsername: (NSString *) username
+              success:(void (^) (BOOL response)) success
+                error:(void (^) (NSError *error)) error;
+
+-(void) checkEmail: (NSString *) email
+           success:(void (^) (BOOL response)) success
+             error:(void (^) (NSError *error)) error;
+
+
 @end
