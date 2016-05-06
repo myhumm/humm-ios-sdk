@@ -1103,6 +1103,10 @@
         [parameters setObject:serviceName forKey:@"service"];
         [parameters setObject:serviceId forKey:@"sid"];
         
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token]
+                         forHTTPHeaderField:@"Authorization"];
+
+        
         [manager DELETE:[NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint]
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
