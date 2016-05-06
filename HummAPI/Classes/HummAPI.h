@@ -12,6 +12,7 @@
 @class SongsAPI;
 @class PlaylistsAPI;
 @class Song;
+@class LoginInfo;
 
 //#import "Song.h"ff
 
@@ -58,5 +59,7 @@
 
 -(void) updateUserToken:(void (^) (void)) updatedSuccess
          onUpdatedError:(void (^) (NSError *error)) updatedError;
+
+-(void) updateLoginDataWithLoginInfo:(LoginInfo *) loginInfo;
 
 @end

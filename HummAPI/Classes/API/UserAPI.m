@@ -73,6 +73,47 @@
           }];
 }
 
+-(void) loginWithService:(NSString *) userId
+          onLoginSuccess:(void (^) (LoginInfo *loginInfo)) loginSuccess
+            onLoginError:(void (^) (NSError *error)) loginError
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer =[AFJSONResponseSerializer serializer];
+    
+    NSDictionary *parameters = [[NSDictionary alloc]init];
+    
+    parameters = [[NSDictionary alloc]initWithObjectsAndKeys:
+                  userId, @"userId",
+                  self.humm.grantType , @"grant_type",
+                  self.humm.clientId, @"client_id",
+                  nil];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/loginWithService", self.humm.endPoint];
+    //    [manager POST:[NSString stringWithFormat:@"%@/token", self.humm.endPoint]
+    [manager POST:url
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+              {
+                  NSError* err = nil;
+                  LoginInfo *login = [[LoginInfo alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                  [self updateLoginDataWithLoginInfo:login];
+                  loginSuccess(login);
+              }
+              else {
+                  loginError([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+              }
+              
+          } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+              NSLog(@"error = %@", [e localizedDescription]);
+              loginError(e);
+          }];
+}
+
+
 - (void) doSignupWithUsername: (NSString *) username
                      password: (NSString *) password
                         email: (NSString *) email
@@ -867,10 +908,6 @@
         error(e);
         
     }];
-    
-    //checkemail
-    
-    //checkusername
 }
 
 
@@ -893,27 +930,27 @@
                          forHTTPHeaderField:@"Authorization"];
         
         [manager GET:[NSString stringWithFormat:@"%@/users/checkemail", self.humm.endPoint]
-           parameters:parameters
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-                  {
-                      if ([responseObject[@"data_response"] isEqualToString:RESPONSE_USER_EXISTS])
-                      {
-                          success(YES);
-                      }
-                      else {
-                          success(NO);
-                      }
-                  }
-                  else {
-                      error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-                  }
-                  
-              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-                  NSLog(@"error = %@", [e localizedDescription]);
-                  error(e);
-              }];
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                 {
+                     if ([responseObject[@"data_response"] isEqualToString:RESPONSE_USER_EXISTS])
+                     {
+                         success(YES);
+                     }
+                     else {
+                         success(NO);
+                     }
+                 }
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
         
     } onUpdatedError:^(NSError *e) {
         NSLog(@"error = %@", [e localizedDescription]);
@@ -921,8 +958,6 @@
         
     }];
 }
-
-//checkusername
 
 -(void) checkUsername: (NSString *) username
               success:(void (^) (BOOL response)) success
@@ -943,33 +978,139 @@
                          forHTTPHeaderField:@"Authorization"];
         
         [manager GET:[NSString stringWithFormat:@"%@/users/checkusername", self.humm.endPoint]
-           parameters:parameters
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
-                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-                  {
-                      if ([responseObject[@"data_response"] isEqualToString:RESPONSE_USER_EXISTS])
-                      {
-                          success(YES);
-                      }
-                      else {
-                          success(NO);
-                      }
-                  }
-                  else {
-                      error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-                  }
-                  
-              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-                  NSLog(@"error = %@", [e localizedDescription]);
-                  error(e);
-              }];
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                 {
+                     if ([responseObject[@"data_response"] isEqualToString:RESPONSE_USER_EXISTS])
+                     {
+                         success(YES);
+                     }
+                     else {
+                         success(NO);
+                     }
+                 }
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
         
     } onUpdatedError:^(NSError *e) {
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
     }];
+    
+}
+
+-(void) addServiceWithServiceName:(NSString *) serviceName
+                         seviceId:(NSString *) serviceId
+                            token:(NSString *) serviceToken
+                  serviceUsername:(NSString *) serviceUsername
+                           secret:(NSString *) secret
+                          success:(void (^) (Settings * response)) success
+                            error:(void (^) (NSError *error)) error
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer =[AFJSONResponseSerializer serializer];
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+    
+    if (!serviceName)
+    {
+        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+    }
+    if (!serviceId)
+    {
+        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+    }
+    if (!serviceToken)
+    {
+        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+    }
+    
+    [parameters setObject:serviceName forKey:@"service"];
+    [parameters setObject:serviceId forKey:@"sid"];
+    [parameters setObject:serviceToken forKey:@"token"];
+    [parameters setObject:serviceUsername forKey:@"uname"];
+    [parameters setObject:serviceUsername forKey:@"secret"];
+    
+    [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+    
+    [manager POST:[NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint]
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              
+              if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+              {
+                  Settings * settings = responseObject[@"data_response"];
+                  success(settings);
+                  
+              }
+              else {
+                  error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+              }
+              
+          } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+              NSLog(@"error = %@", [e localizedDescription]);
+              error(e);
+          }];
+    
+}
+
+-(void) removeService:(NSString *) serviceName
+            serviceId:(NSString *) serviceId
+              success:(void (^) (Settings * response)) success
+                error:(void (^) (NSError *error)) error
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer =[AFJSONResponseSerializer serializer];
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+    
+    if (!serviceName)
+    {
+        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+    }
+    if (!serviceId)
+    {
+        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+    }
+    if (!self.token)
+    {
+        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+    }
+    
+    [parameters setObject:serviceName forKey:@"service"];
+    [parameters setObject:serviceId forKey:@"sid"];
+    
+    [manager DELETE:[NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint]
+         parameters:parameters
+            success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                {
+                    Settings * settings = responseObject[@"data_response"];
+                    success(settings);
+                    
+                }
+                else {
+                    error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                }
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                NSLog(@"error = %@", [e localizedDescription]);
+                error(e);
+            }];
     
 }
 

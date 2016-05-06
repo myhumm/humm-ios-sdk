@@ -141,6 +141,8 @@
 		A30FF6C11CC8EF5100845C39 /* JSONModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FB33B62093AF37CFD40A8F /* JSONModel.framework */; };
 		A3945FC009865B0F73380BF4 /* EXPMatchers+beFalsy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F052D4419948421C817B5FF /* EXPMatchers+beFalsy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3B0026CB6B42EA4A452C5B8 /* JSONModelArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE61BF33DD0633D9325A63D /* JSONModelArray.m */; };
+		A3CE884C1CDBA8AA00445D9A /* Settings.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CE884A1CDBA8AA00445D9A /* Settings.h */; };
+		A3CE884E1CDBAC1300445D9A /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CE884B1CDBA8AA00445D9A /* Settings.m */; };
 		A3FA15BC1CD8F90C0066E9C0 /* HummAPI_UnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15BB1CD8F90C0066E9C0 /* HummAPI_UnitTests.m */; };
 		A3FA15BE1CD8F90C0066E9C0 /* HummAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8541CEC78A0AB677ABF3DD32 /* HummAPI.framework */; };
 		A3FA15CA1CD8F97E0066E9C0 /* ArtistTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FA15C41CD8F97E0066E9C0 /* ArtistTest.m */; };
@@ -457,6 +459,8 @@
 		9B35F05BBBE3A027F07777D3 /* LoginInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LoginInfo.h; sourceTree = "<group>"; };
 		A17AC2DCA0C684B384A164BE /* EXPMatchers+beFalsy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beFalsy.h"; path = "Expecta/Matchers/EXPMatchers+beFalsy.h"; sourceTree = "<group>"; };
 		A353495AF644F350C8AFEA1C /* JSONValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONValueTransformer.m; path = JSONModel/JSONModelTransformations/JSONValueTransformer.m; sourceTree = "<group>"; };
+		A3CE884A1CDBA8AA00445D9A /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
+		A3CE884B1CDBA8AA00445D9A /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		A3FA15B91CD8F90B0066E9C0 /* HummAPI_UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HummAPI_UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3FA15BB1CD8F90C0066E9C0 /* HummAPI_UnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HummAPI_UnitTests.m; sourceTree = "<group>"; };
 		A3FA15BD1CD8F90C0066E9C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -798,6 +802,8 @@
 				DC65C97652B6B82DC17495BB /* Song.m */,
 				5AB8E021FD0D40B1264CB16D /* User.h */,
 				917667272B1C37164E85D72C /* User.m */,
+				A3CE884A1CDBA8AA00445D9A /* Settings.h */,
+				A3CE884B1CDBA8AA00445D9A /* Settings.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1217,6 +1223,7 @@
 				B5C83CFC0D874CBC43B7CB4E /* UIActivityIndicatorView+AFNetworking.h in Headers */,
 				7776F475D2E9E3DBBAD1FC42 /* UIAlertView+AFNetworking.h in Headers */,
 				3B2B29AEE900D0B780AB7227 /* UIButton+AFNetworking.h in Headers */,
+				A3CE884C1CDBA8AA00445D9A /* Settings.h in Headers */,
 				FC4DA6667780ECC701BB13D6 /* UIImage+AFNetworking.h in Headers */,
 				651509E668C666363A415706 /* UIImageView+AFNetworking.h in Headers */,
 				CE59468FDD3A766E8F6EF2D5 /* UIKit+AFNetworking.h in Headers */,
@@ -1597,6 +1604,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3CE884E1CDBAC1300445D9A /* Settings.m in Sources */,
 				B8800F60D8A3C9570414D46C /* AFNetworkActivityLogger.m in Sources */,
 				DE8AC74DE3DA8E0CA13AC652 /* Artist.m in Sources */,
 				4A7B336ACBBDE84BBFB85432 /* ArtistsAPI.m in Sources */,
@@ -2368,6 +2376,7 @@
 				A3FA15C21CD8F90C0066E9C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF8AE8172D9C7D0C820D4951 /* Build configuration list for PBXNativeTarget "Specta" */ = {
 			isa = XCConfigurationList;
