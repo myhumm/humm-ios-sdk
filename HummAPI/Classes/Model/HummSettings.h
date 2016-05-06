@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "JSONModel.h"
 
-@interface Settings : JSONModel
+@interface HummSettings : JSONModel
 @property (nonatomic, strong) NSDictionary *stats;
 @property (nonatomic, strong) NSDictionary *account;
 @property (nonatomic, strong) NSArray *services;

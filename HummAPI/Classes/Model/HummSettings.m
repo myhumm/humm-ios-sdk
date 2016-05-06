@@ -6,9 +6,9 @@
 //
 //
 
-#import "Settings.h"
+#import "HummSettings.h"
 
-@implementation Settings
+@implementation HummSettings
 
 
 @end

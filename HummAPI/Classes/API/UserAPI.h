@@ -14,7 +14,7 @@
 #import "Playlist.h"
 #import "Artist.h"
 #import "Song.h"
-#import "Settings.h"
+#import "HummSettings.h"
 
 @interface UserAPI : HummAPI
 
@@ -109,12 +109,12 @@
                             token:(NSString *) serviceToken
                   serviceUsername:(NSString *) serviceUsername
                            secret:(NSString *) secret
-                          success:(void (^) (Settings * response)) success
+                          success:(void (^) (HummSettings * response)) success
                             error:(void (^) (NSError *error)) error;
 
 -(void) removeService:(NSString *) serviceName
             serviceId:(NSString *) serviceId
-              success:(void (^) (Settings * response)) success
+              success:(void (^) (LoginInfo * response)) success
                 error:(void (^) (NSError *error)) error;
 
 @end

@@ -1013,7 +1013,7 @@
                             token:(NSString *) serviceToken
                   serviceUsername:(NSString *) serviceUsername
                            secret:(NSString *) secret
-                          success:(void (^) (Settings * response)) success
+                          success:(void (^) (HummSettings * response)) success
                             error:(void (^) (NSError *error)) error
 {
     
@@ -1052,7 +1052,7 @@
                   
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
-                      Settings * settings = responseObject[@"data_response"];
+                      HummSettings * settings = responseObject[@"data_response"];
                       success(settings);
                       
                   }
@@ -1074,7 +1074,7 @@
 
 -(void) removeService:(NSString *) serviceName
             serviceId:(NSString *) serviceId
-              success:(void (^) (Settings * response)) success
+              success:(void (^) (LoginInfo * response)) success
                 error:(void (^) (NSError *error)) error
 {
     
@@ -1089,15 +1089,15 @@
         
         if (!serviceName)
         {
-            error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+            error([NSError errorWithDomain:@"ServiceName cant be null" code:100 userInfo:nil]);
         }
         if (!serviceId)
         {
-            error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+            error([NSError errorWithDomain:@"serviceId cant be null" code:100 userInfo:nil]);
         }
-        if (!self.token)
+        if (!self.humm.token)
         {
-            error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+            error([NSError errorWithDomain:@"token cant be null" code:100 userInfo:nil]);
         }
         
         [parameters setObject:serviceName forKey:@"service"];
@@ -1113,7 +1113,7 @@
                     
                     if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                     {
-                        Settings * settings = responseObject[@"data_response"];
+                        LoginInfo * settings = responseObject[@"data_response"];
                         success(settings);
                         
                     }

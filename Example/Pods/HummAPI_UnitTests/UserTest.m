@@ -77,7 +77,7 @@
     
     UserAPI *userAPI = [self.humm users];
     
-
+    
     [userAPI doSignupWithUsername:username
                          password:password
                             email:email
@@ -544,10 +544,10 @@
     NSString *email = @"jose@neteleven.es";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
-
+    
     self.humm.MODE_DEBUG = YES;
     UserAPI *userAPI = [self.humm users];
-
+    
     [userAPI resetPassword:email success:^(BOOL response) {
         XCTAssertTrue (response);
         [expectation fulfill];
@@ -555,7 +555,7 @@
         NSLog(@"error = %@", [error localizedDescription]);
         XCTAssertFalse(YES);
     }];
-
+    
     [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
         if(error)
         {
@@ -563,7 +563,7 @@
         }
         
     }];
-
+    
 }
 
 -(void) testCheckEmail {
@@ -602,6 +602,34 @@
     
     [userAPI checkUsername:username success:^(BOOL response) {
         XCTAssertTrue (response);
+        [expectation fulfill];
+    } error:^(NSError *error) {
+        NSLog(@"error = %@", [error localizedDescription]);
+        XCTAssertFalse(YES);
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+    
+}
+
+-(void) testRemoveService {
+    NSString *service = @"facebook";
+    NSString *userId = @"180331315688964";
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    self.humm.MODE_DEBUG = YES;
+    UserAPI *userAPI = [self.humm users];
+    
+    [userAPI removeService:service serviceId:userId
+                   success:^(LoginInfo * response) {
+        XCTAssertTrue (YES);
         [expectation fulfill];
     } error:^(NSError *error) {
         NSLog(@"error = %@", [error localizedDescription]);
