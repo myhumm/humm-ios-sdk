@@ -76,7 +76,7 @@
     if (seconds < self.token_expires) {
         //user is loged
         if (self.token) {
-            return;
+            updatedSuccess();
         }
     }
     
