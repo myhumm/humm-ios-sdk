@@ -77,6 +77,7 @@
         //user is loged
         if (self.token) {
             updatedSuccess();
+            return;
         }
     }
     
