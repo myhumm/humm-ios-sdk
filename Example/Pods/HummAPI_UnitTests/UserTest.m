@@ -67,22 +67,25 @@
     }];
 }
 -(void) testSignup {
-    NSString *username = @"deletemeIos2";
-    NSString *password = @"deletemeIos2";
-    NSString *email = @"deletemeIos2@ios2.com";
+    NSString *username = @"deletemeIos3";
+    NSString *password = @"deletemeIos3";
+    NSString *email = @"deletemeIos2@ios3.com";
     NSString *firstName = @"delete";
     NSString *lastName = @"me";
+    NSString *referal = @"referal";
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     UserAPI *userAPI = [self.humm users];
-    
+    self.humm.MODE_DEBUG = YES;
+
     
     [userAPI doSignupWithUsername:username
                          password:password
                             email:email
                         firstName:firstName
                          lastName:lastName
+                          referal:referal
                           success:^(LoginInfo *response) {
                               [expectation fulfill];
                           } error:^(NSError *error) {

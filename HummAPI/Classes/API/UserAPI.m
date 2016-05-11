@@ -140,13 +140,24 @@
                   referal, @"referal",
                   nil];
     
-    //    NSString *url = [NSString stringWithFormat:@"%@/users/signup?username=%@&password=%@&email=%@&firstname=%@&lastname=%@", self.humm.endPoint, username, password, email, firstName, lastName];
+    NSString *url = [NSString stringWithFormat:@"%@/users/signup?username=%@&password=%@&email=%@&firstname=%@&lastname=%@&referal=%@&client_id=%@", self.humm.endPoint, username, password, email, firstName, lastName, referal, self.humm.clientId];
     
-    NSString *url = [NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint];
+//    NSString *url = [NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint];
     
+    //[manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
+    
+    if (self.MODE_DEBUG)
+    {
+        [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+        [[AFNetworkActivityLogger sharedLogger] startLogging];
+    }
+    
+    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+
+
+//     [manager POST:[NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint]
     [manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
-     
-     //    [manager POST:[NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint]
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
@@ -188,10 +199,6 @@
         [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
         [[AFNetworkActivityLogger sharedLogger] startLogging];
     }
-    
-    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-    
     
     AFHTTPRequestOperation *operation = [manager POST:[NSString stringWithFormat:@"%@/token", self.humm.endPoint]
                                            parameters:parameters
