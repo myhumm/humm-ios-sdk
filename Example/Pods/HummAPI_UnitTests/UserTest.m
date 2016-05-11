@@ -766,7 +766,7 @@
 
 -(void) testLoginWithService
 {
-    NSString *service = @"facebook";
+//    NSString *service = @"facebook";
     NSString *userId = @"180331315688964";
     
     self.humm.MODE_DEBUG = YES;
