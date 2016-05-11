@@ -764,5 +764,32 @@
     
 }
 
+-(void) testLoginWithService
+{
+    NSString *service = @"facebook";
+    NSString *userId = @"180331315688964";
+    
+    self.humm.MODE_DEBUG = YES;
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    [[self.humm users]loginWithService:userId onLoginSuccess:^(LoginInfo *loginInfo) {
+        XCTAssertTrue (loginInfo != nil);
+        [expectation fulfill];
+    } onLoginError:^(NSError *error) {
+        NSLog(@"error = %@", [error localizedDescription]);
+        XCTAssertFalse(YES);
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+    
+}
+
 
 @end

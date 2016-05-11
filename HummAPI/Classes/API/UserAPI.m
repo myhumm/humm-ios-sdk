@@ -77,6 +77,8 @@
           onLoginSuccess:(void (^) (LoginInfo *loginInfo)) loginSuccess
             onLoginError:(void (^) (NSError *error)) loginError
 {
+    
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -90,12 +92,22 @@
                   self.humm.clientId, @"client_id",
                   nil];
     
-    NSString *url = [NSString stringWithFormat:@"%@/loginWithService", self.humm.endPoint];
-    //    [manager POST:[NSString stringWithFormat:@"%@/token", self.humm.endPoint]
+//    NSString *url = [NSString stringWithFormat:@"%@/loginWithService", self.humm.endPoint];
+    
+    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+
+    NSString *url = [NSString stringWithFormat:@"%@/loginWithService?userId=%@&grant_type=%@&client_id=%@", self.humm.endPoint, userId, self.humm.grantType, self.humm.clientId];
+    
     [manager POST:url
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               
+              if (!responseObject)
+              {
+                  loginSuccess(nil);
+                  return;
+              }
               if ([@"ok" isEqualToString:responseObject[@"status_response"]])
               {
                   NSError* err = nil;
@@ -151,10 +163,6 @@
         [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
         [[AFNetworkActivityLogger sharedLogger] startLogging];
     }
-    
-    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-
 
 //     [manager POST:[NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint]
     [manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
