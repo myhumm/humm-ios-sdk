@@ -685,4 +685,81 @@
 
 }
 
+-(void) testTwitterService
+{
+    NSString *user = @"jose100";
+    NSString *password = @"jose1000";
+    
+    self.humm.MODE_DEBUG = YES;
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    [self.humm loginWithUsername:user password:password onLoginSuccess:^{
+        
+        UserAPI *userAPI = [self.humm users];
+        
+        [userAPI me:^(User *response) {
+            XCTAssertTrue ([response getTwitterService] != nil);
+            [expectation fulfill];
+
+        } error:^(NSError *error) {
+            NSLog(@"error = %@", [error localizedDescription]);
+            XCTAssertFalse(YES);
+
+        }];
+        
+    } onLoginError:^(NSError *error) {
+        XCTFail(@"Expectation Failed with error: %@", error);
+        
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+
+}
+
+-(void) testFacebookService
+{
+    NSString *user = @"jose100";
+    NSString *password = @"jose1000";
+    
+    self.humm.MODE_DEBUG = YES;
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    [self.humm loginWithUsername:user password:password onLoginSuccess:^{
+        
+        UserAPI *userAPI = [self.humm users];
+        
+        [userAPI me:^(User *response) {
+            XCTAssertTrue ([response getFacebookService] != nil);
+            [expectation fulfill];
+            
+        } error:^(NSError *error) {
+            NSLog(@"error = %@", [error localizedDescription]);
+            XCTAssertFalse(YES);
+            
+        }];
+        
+    } onLoginError:^(NSError *error) {
+        XCTFail(@"Expectation Failed with error: %@", error);
+        
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+    
+}
+
+
 @end

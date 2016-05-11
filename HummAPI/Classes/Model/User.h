@@ -18,7 +18,7 @@
 
 @property (nonatomic, strong) NSDictionary *account;
 @property (nonatomic, strong) NSDictionary *preferences;
-@property (nonatomic, strong) NSDictionary *services;
+@property (nonatomic, strong) NSArray *services;
 @property (nonatomic, strong) NSString *signup;
 @property (nonatomic, strong) NSString *last_visit;
 @property (nonatomic) BOOL featured;
