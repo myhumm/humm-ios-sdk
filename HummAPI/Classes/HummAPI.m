@@ -89,8 +89,22 @@
         updatedError(error);
     }];
     
-    
-    
+}
+
+-(NSString *) token
+{
+    if (!self.token)
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *tokenStored = [defaults objectForKey:@"token"];
+        
+        //TODO: check to renew
+        return tokenStored;
+        
+    }
+    else {
+        return self.token;
+    }
 }
 
 -(void) radio:(NSArray *) genres
@@ -123,6 +137,13 @@
     NSInteger seconds = [date timeIntervalSinceReferenceDate];
     
     self.token_expires = seconds + loginInfo.expires_in;
+    
+    //save token and token_expires to user defaults
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:self.token forKey:@"token"];
+    [defaults setInteger:self.token_expires forKey:@"token_expires"];
+    [defaults synchronize];
+
 }
 
 - (UserAPI *) users {
