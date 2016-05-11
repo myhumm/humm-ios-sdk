@@ -30,6 +30,7 @@
                         email: (NSString *) email
                     firstName: (NSString *) firstName
                      lastName:(NSString *) lastName
+                      referal:(NSString *) referal
                       success:(void (^) (LoginInfo *response)) success
                         error:(void (^) (NSError *error)) error;
 

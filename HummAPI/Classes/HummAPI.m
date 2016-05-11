@@ -52,7 +52,7 @@
             onLoginSuccess:(void (^) (void)) loginSuccess
               onLoginError:(void (^) (NSError *error)) loginError
 {
-    [[self users] doSignupWithUsername:username password:password email:email firstName:firstName lastName:lastName success:^(LoginInfo *response) {
+    [[self users] doSignupWithUsername:username password:password email:email firstName:firstName lastName:lastName referal:referal success:^(LoginInfo *response) {
         [self updateLoginDataWithLoginInfo:(response)];
         loginSuccess();
     } error:^(NSError *error) {
