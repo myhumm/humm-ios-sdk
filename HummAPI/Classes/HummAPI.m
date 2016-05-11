@@ -91,7 +91,7 @@
     
 }
 
--(NSString *) token
+-(NSString *) getToken
 {
     if (!self.token)
     {

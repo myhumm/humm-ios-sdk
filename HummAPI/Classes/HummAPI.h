@@ -61,5 +61,6 @@
          onUpdatedError:(void (^) (NSError *error)) updatedError;
 
 -(void) updateLoginDataWithLoginInfo:(LoginInfo *) loginInfo;
+-(NSString *) getToken;
 
 @end
