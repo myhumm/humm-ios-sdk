@@ -117,4 +117,10 @@
               success:(void (^) (LoginInfo * response)) success
                 error:(void (^) (NSError *error)) error;
 
+
+-(void) putGenres:(NSArray *) likes
+         dislikes: (NSArray *) dislikes
+          success:(void (^) (LoginInfo * response)) success
+            error:(void (^) (NSError *error)) error;
+
 @end

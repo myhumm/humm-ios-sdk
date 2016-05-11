@@ -646,4 +646,43 @@
     
 }
 
+-(void) testPutGenres {
+    NSArray *likes = @[@"pop", @"rock"];
+    NSArray *dislikes = @[@"samba"];
+    
+    self.humm.MODE_DEBUG = YES;
+
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+
+    [self.humm loginWithUsername:@"jose100" password:@"jose1000" onLoginSuccess:^{
+        
+        UserAPI *userAPI = [self.humm users];
+        
+        [userAPI putGenres:likes dislikes:dislikes success:^(LoginInfo *response) {
+            XCTAssertTrue (YES);
+            [expectation fulfill];
+            
+        } error:^(NSError *error) {
+            NSLog(@"error = %@", [error localizedDescription]);
+            XCTAssertFalse(YES);
+            
+        }];
+        
+    } onLoginError:^(NSError *error) {
+        XCTFail(@"Expectation Failed with error: %@", error);
+
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+
+    
+
+}
+
 @end

@@ -1134,4 +1134,62 @@
     
 }
 
+-(void) putGenres:(NSArray *) likes
+         dislikes: (NSArray *) dislikes
+          success:(void (^) (LoginInfo * response)) success
+            error:(void (^) (NSError *error)) error
+{
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (!likes)
+        {
+            error([NSError errorWithDomain:@"likes cant be null" code:100 userInfo:nil]);
+        }
+        if (!dislikes)
+        {
+            error([NSError errorWithDomain:@"dislikes cant be null" code:100 userInfo:nil]);
+        }
+        
+        NSDictionary *genres = [NSDictionary dictionaryWithObjectsAndKeys:likes, @"like",dislikes, @"dislike", nil];
+        
+//        [parameters setObject:@"preferences", genres];
+        [parameters setObject:genres forKey:@"preferences"];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token]
+                         forHTTPHeaderField:@"Authorization"];
+        
+        
+        [manager PATCH:[NSString stringWithFormat:@"%@/users/me/settings", self.humm.endPoint]
+             parameters:parameters
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    
+                    if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                    {
+                        LoginInfo * settings = responseObject[@"data_response"];
+                        success(settings);
+                        
+                    }
+                    else {
+                        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                    }
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                    NSLog(@"error = %@", [e localizedDescription]);
+                    error(e);
+                }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+
+}
+
 @end
