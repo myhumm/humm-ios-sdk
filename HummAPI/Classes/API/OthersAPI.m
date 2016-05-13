@@ -100,14 +100,75 @@
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
-
+        
         
     } onUpdatedError:^(NSError *e) {
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];
-
+    
     
 }
+
+-(void) weeklyPlaylist:(void (^) (NSArray<Song *> *response)) success
+                 error:(void (^) (NSError *error)) error
+
+{
+    
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        
+        [parameters setObject:[NSNumber numberWithBool:YES ] forKey:@"weekly"];
+        
+        [manager GET:[NSString stringWithFormat:@"%@/radio", self.humm.endPoint]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 
+                 if (!responseObject)
+                 {
+                     success (nil);
+                     return ;
+                 }
+                 
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                 {
+                     
+                     NSError *err;
+                     
+                     NSArray<Song *> *songs = [Song arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
+                     
+                     if (err)
+                     {
+                         error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+                     }
+                     
+                     success(songs);
+                 }
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+    }];
+    
+    
+}
+
 
 @end

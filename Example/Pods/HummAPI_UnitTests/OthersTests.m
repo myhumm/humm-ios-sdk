@@ -78,5 +78,34 @@
     
 }
 
+-(void) testWeeklyPlaylist {
+    
+    NSString *username = @"deleteme100";
+    NSString *password = @"deleteme100";
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    [self.humm loginWithUsername:username password:password onLoginSuccess:^{
+        
+        [self.humm weeklyPlaylist:^(NSArray<Song *> *response) {
+            [expectation fulfill];
+        } error:^(NSError *err) {
+            XCTAssertFalse(YES);
+        }];
+        
+    } onLoginError:^(NSError *error) {
+        XCTAssertFalse(YES);
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+    
+}
+
 
 @end

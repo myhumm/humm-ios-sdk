@@ -19,4 +19,7 @@
       success:(void (^) (NSArray<Song *> *response)) success
         error:(void (^) (NSError *error)) error;
 
+-(void) weeklyPlaylist:(void (^) (NSArray<Song *> *response)) success
+                 error:(void (^) (NSError *error)) error;
+
 @end

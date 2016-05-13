@@ -55,6 +55,9 @@
         error:(void (^) (NSError *err)) error;
 
 
+-(void) weeklyPlaylist:(void (^) (NSArray<Song *> *response)) success
+                 error:(void (^) (NSError *err)) error;
+
 + (id)sharedManager;
 
 -(void) updateUserToken:(void (^) (void)) updatedSuccess

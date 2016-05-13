@@ -122,6 +122,16 @@
     }];
 }
 
+-(void) weeklyPlaylist:(void (^) (NSArray<Song *> *response)) success
+                 error:(void (^) (NSError *err)) error
+{
+    [[self others]weeklyPlaylist:^(NSArray<Song *> *response) {
+        success(response);
+    } error:^(NSError *err) {
+        error(err);
+    }];
+}
+
 
 -(void) updateLoginDataWithLoginInfo:(LoginInfo *) loginInfo
 {
