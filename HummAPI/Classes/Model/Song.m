@@ -51,4 +51,14 @@
     
 }
 
+-(NSString *) getArtistName {
+    if (self.artists && [self.artists firstObject])
+    {
+        return [self.artists firstObject][@"name"];
+    }
+    return nil;
+    
+}
+
+
 @end

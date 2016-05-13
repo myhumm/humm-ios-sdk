@@ -30,4 +30,6 @@
 -(NSString *) getPopularity;
 -(NSString *) getYoutubeURL;
 -(NSString *) getYoutubeId;
+-(NSString *) getArtistName;
+
 @end
