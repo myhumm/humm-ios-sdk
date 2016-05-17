@@ -134,6 +134,8 @@
             return service[@"facebook"];
         }
     }
+    
+    return nil;
 
 }
 

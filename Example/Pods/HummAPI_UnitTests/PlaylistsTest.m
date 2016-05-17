@@ -53,7 +53,7 @@
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         PlaylistsAPI *playlistAPI = [self.humm playlists];
-                
+        
         NSString *title = @"playlist title";
         NSString *description = @"playlist description";
         BOOL private = NO;
@@ -94,7 +94,7 @@
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
         PlaylistsAPI *playlistAPI = [self.humm playlists];
-                
+        
         NSInteger limit = 1;
         NSInteger offset = 0;
         [playlistAPI getFeaturedWithLimit:limit offset:offset
@@ -533,6 +533,40 @@
                                    //                        NSLog(@"error = %@", [error localizedDescription]);
                                    XCTAssertFalse(YES);
                                }];
+        
+    } onLoginError:^(NSError *error) {
+        XCTAssertFalse(YES);
+    }];
+    
+    [self waitForExpectationsWithTimeout:15.0 handler:^(NSError * _Nullable error) {
+        if(error)
+        {
+            XCTFail(@"Expectation Failed with error: %@", error);
+        }
+        
+    }];
+    
+}
+
+-(void) testStaffPicks {
+    NSString *username = @"jose100";
+    NSString *password = @"jose1000";
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+    
+    [self.humm loginWithUsername:username password:password onLoginSuccess:^{
+        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        
+        NSInteger limit = 5;
+        NSInteger offset = 0;
+        
+        [playlistAPI getStaffPicksWithlimit:limit offset:offset
+                                    success:^(NSArray<Playlist *> *response) {
+                                        XCTAssertTrue(response.count != nil);
+                                        [expectation fulfill];
+                                    } error:^(NSError *error) {
+                                        XCTAssertFalse(YES);
+                                    }];
         
     } onLoginError:^(NSError *error) {
         XCTAssertFalse(YES);

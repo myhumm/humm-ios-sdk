@@ -84,4 +84,9 @@ error:(void (^) (NSError *error)) error;
                   success:(void (^) (NSArray<Playlist *> *response)) success
                     error:(void (^) (NSError *error)) error;
 
+-(void) getStaffPicksWithlimit:(NSInteger) limit
+                        offset:(NSInteger) offset
+                       success:(void (^) (NSArray<Playlist *> *response)) success
+                         error:(void (^) (NSError *error)) error;
+
 @end

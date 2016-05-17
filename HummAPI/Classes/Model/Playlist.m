@@ -10,10 +10,16 @@
 
 @implementation Playlist
 
+#define PLAYLIST_ENDPOINT @"http://wave.livingindietv.com/images/playlist?id=%@&size=thumb"
+
 +(BOOL)propertyIsOptional:(NSString*)propertyName
 {
     return YES;
 }
 
+- (NSString *) getCover
+{
+    return [NSString stringWithFormat:PLAYLIST_ENDPOINT, self._id ];
 
+}
 @end
