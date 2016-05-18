@@ -52,7 +52,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         NSString *title = @"playlist title";
         NSString *description = @"playlist description";
@@ -93,7 +93,7 @@
     
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         NSInteger limit = 1;
         NSInteger offset = 0;
@@ -131,7 +131,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
@@ -170,7 +170,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"565f32f298cd5758490cc24d";
@@ -209,7 +209,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
@@ -259,7 +259,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
@@ -296,7 +296,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"55ec2734ae8c50a06e8b7aff";
@@ -334,7 +334,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"55ec2734ae8c50a06e8b7aff";
@@ -371,7 +371,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
@@ -407,7 +407,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         
         NSString *idPlaylist = @"5645aed5b4653cdb631d5632";
@@ -444,7 +444,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         NSInteger limit = 1;
         NSInteger offset = 0;
@@ -482,7 +482,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         NSInteger limit = 1;
         NSInteger offset = 0;
@@ -518,7 +518,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         NSInteger limit = 5;
         NSInteger offset = 0;
@@ -555,7 +555,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        PlaylistsAPI *playlistAPI = [self.humm playlists];
+        PlaylistsAPI *playlistAPI = [self.humm playlistAPI];
         
         NSInteger limit = 5;
         NSInteger offset = 0;

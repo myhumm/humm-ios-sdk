@@ -28,7 +28,7 @@
 @property (nonatomic, strong) UserAPI *users;
 @property (nonatomic, strong) ArtistsAPI *artists;
 @property (nonatomic, strong) SongsAPI *songs;
-@property (nonatomic, strong) PlaylistsAPI *playlists;
+@property (nonatomic, strong) PlaylistsAPI *playlistAPI;
 
 @property (nonatomic, assign, getter=isDebug) BOOL MODE_DEBUG;
 

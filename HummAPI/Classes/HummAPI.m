@@ -168,7 +168,7 @@
     return [[SongsAPI alloc] init];
 }
 
-- (PlaylistsAPI *)playlists
+- (PlaylistsAPI *) playlistAPI
 {
     return [[PlaylistsAPI alloc]init];
 }
