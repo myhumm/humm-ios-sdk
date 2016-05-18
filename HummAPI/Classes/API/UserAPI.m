@@ -303,7 +303,7 @@
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 NSLog(@"response %@", responseObject);
+//                 NSLog(@"response %@", responseObject);
                  
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {

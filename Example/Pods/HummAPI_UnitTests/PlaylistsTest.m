@@ -563,6 +563,8 @@
         [playlistAPI getStaffPicksWithlimit:limit offset:offset
                                     success:^(NSArray<Playlist *> *response) {
                                         XCTAssertTrue(response.count != nil);
+                                        Playlist *playlist = [response firstObject];
+                                        NSLog(@"owner %@", [playlist getOwnerName]);
                                         [expectation fulfill];
                                     } error:^(NSError *error) {
                                         XCTAssertFalse(YES);

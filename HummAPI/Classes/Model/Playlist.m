@@ -23,6 +23,38 @@
 
 }
 
+-(NSString *) getOwnerName
+{
+    if ([self.owner firstObject][@"name"])
+    {
+        return [self.owner firstObject][@"name"];
+    }
+    
+    
+    return nil;
+}
+
+-(NSString *) getOwnerAvatar
+{
+    if ([self.owner firstObject][@"avatar"])
+    {
+        return [self.owner firstObject][@"avatar"];
+    }
+    
+    
+    return nil;
+}
+
+-(NSString *) getOwnerUid
+{
+    if ([self.owner firstObject][@"uid"])
+    {
+        return [self.owner firstObject][@"uid"];
+    }
+    
+    
+    return nil;
+}
 
 
 - (BOOL)isEqual:(id)other {

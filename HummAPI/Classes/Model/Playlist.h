@@ -17,7 +17,12 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSArray *contributors;
 //owner can be array or dictionary
-//@property (nonatomic, strong) id owner;
+@property (nonatomic, strong) NSArray* owner;
 
 - (NSString *) getCover;
+
+-(NSString *) getOwnerName;
+-(NSString *) getOwnerAvatar;
+-(NSString *) getOwnerUid;
+
 @end
