@@ -50,7 +50,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
 
         NSString *idArtist = @"55116991f9c816a0d639ea75";
         NSInteger limit = 0;
@@ -92,7 +92,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         NSString *idArtist = @"55116991f9c816a0d639ea75";
         
@@ -134,7 +134,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         
         NSString *idArtist = @"55116991f9c816a0d639ea75";
@@ -177,7 +177,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         
         NSString *idArtist = @"55116991f9c816a0d639ea75";
@@ -220,7 +220,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         
         NSString *idArtist = @"55116991f9c816a0d639ea75";
@@ -263,7 +263,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         
         NSString *idArtist = @"55116991f9c816a0d639ea75";
@@ -306,7 +306,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         NSString *idArtist = @"55116991f9c816a0d639ea75";
         
@@ -348,7 +348,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         
         NSInteger limit = 5;
@@ -389,7 +389,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         
         NSInteger limit = 5;
@@ -430,7 +430,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         
         NSInteger limit = 5;
@@ -471,7 +471,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
     
     [self.humm loginWithUsername:username password:password onLoginSuccess:^{
-        ArtistsAPI *artistAPI = [self.humm artists];
+        ArtistsAPI *artistAPI = [self.humm artistAPI];
         
         NSInteger limit = 5;
         NSInteger offset = 0;

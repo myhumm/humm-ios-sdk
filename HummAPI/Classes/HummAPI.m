@@ -160,7 +160,7 @@
     return [[UserAPI alloc] init];
 }
 
-- (ArtistsAPI *) artists {
+- (ArtistsAPI *) artistAPI {
     return [[ArtistsAPI alloc] init];
 }
 

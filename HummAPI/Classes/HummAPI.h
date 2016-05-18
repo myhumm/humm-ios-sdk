@@ -26,7 +26,7 @@
 @property (nonatomic) NSInteger token_expires;
 
 @property (nonatomic, strong) UserAPI *users;
-@property (nonatomic, strong) ArtistsAPI *artists;
+@property (nonatomic, strong) ArtistsAPI *artistAPI;
 @property (nonatomic, strong) SongsAPI *songs;
 @property (nonatomic, strong) PlaylistsAPI *playlistAPI;
 
