@@ -139,6 +139,12 @@
 		A24494E681AAB038C3E6CB5F /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = A353495AF644F350C8AFEA1C /* JSONValueTransformer.m */; };
 		A30FF6C01CC8EF4200845C39 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 979CD63A21A96D238940E43B /* AFNetworking.framework */; };
 		A30FF6C11CC8EF5100845C39 /* JSONModel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FB33B62093AF37CFD40A8F /* JSONModel.framework */; };
+		A32824E71CEC788F00CC7160 /* PlaylistOwnerDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = A32824E51CEC788F00CC7160 /* PlaylistOwnerDictionary.h */; };
+		A32824E81CEC788F00CC7160 /* PlaylistOwnerDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = A32824E61CEC788F00CC7160 /* PlaylistOwnerDictionary.m */; };
+		A32824EB1CEC793500CC7160 /* PlaylistOwnerArray.h in Headers */ = {isa = PBXBuildFile; fileRef = A32824E91CEC793500CC7160 /* PlaylistOwnerArray.h */; };
+		A32824EC1CEC793500CC7160 /* PlaylistOwnerArray.m in Sources */ = {isa = PBXBuildFile; fileRef = A32824EA1CEC793500CC7160 /* PlaylistOwnerArray.m */; };
+		A32824EF1CEC797D00CC7160 /* PlaylistOwnerInt.h in Headers */ = {isa = PBXBuildFile; fileRef = A32824ED1CEC797D00CC7160 /* PlaylistOwnerInt.h */; };
+		A32824F01CEC797D00CC7160 /* PlaylistOwnerInt.m in Sources */ = {isa = PBXBuildFile; fileRef = A32824EE1CEC797D00CC7160 /* PlaylistOwnerInt.m */; };
 		A3945FC009865B0F73380BF4 /* EXPMatchers+beFalsy.m in Sources */ = {isa = PBXBuildFile; fileRef = 0F052D4419948421C817B5FF /* EXPMatchers+beFalsy.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3B0026CB6B42EA4A452C5B8 /* JSONModelArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE61BF33DD0633D9325A63D /* JSONModelArray.m */; };
 		A3CE884C1CDBA8AA00445D9A /* HummSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CE884A1CDBA8AA00445D9A /* HummSettings.h */; };
@@ -458,6 +464,12 @@
 		9A6F143261C6E493BFE71454 /* EXPDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = EXPDefines.h; path = Expecta/EXPDefines.h; sourceTree = "<group>"; };
 		9B35F05BBBE3A027F07777D3 /* LoginInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = LoginInfo.h; sourceTree = "<group>"; };
 		A17AC2DCA0C684B384A164BE /* EXPMatchers+beFalsy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "EXPMatchers+beFalsy.h"; path = "Expecta/Matchers/EXPMatchers+beFalsy.h"; sourceTree = "<group>"; };
+		A32824E51CEC788F00CC7160 /* PlaylistOwnerDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistOwnerDictionary.h; sourceTree = "<group>"; };
+		A32824E61CEC788F00CC7160 /* PlaylistOwnerDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistOwnerDictionary.m; sourceTree = "<group>"; };
+		A32824E91CEC793500CC7160 /* PlaylistOwnerArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistOwnerArray.h; sourceTree = "<group>"; };
+		A32824EA1CEC793500CC7160 /* PlaylistOwnerArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistOwnerArray.m; sourceTree = "<group>"; };
+		A32824ED1CEC797D00CC7160 /* PlaylistOwnerInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaylistOwnerInt.h; sourceTree = "<group>"; };
+		A32824EE1CEC797D00CC7160 /* PlaylistOwnerInt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaylistOwnerInt.m; sourceTree = "<group>"; };
 		A353495AF644F350C8AFEA1C /* JSONValueTransformer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JSONValueTransformer.m; path = JSONModel/JSONModelTransformations/JSONValueTransformer.m; sourceTree = "<group>"; };
 		A3CE884A1CDBA8AA00445D9A /* HummSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HummSettings.h; sourceTree = "<group>"; };
 		A3CE884B1CDBA8AA00445D9A /* HummSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HummSettings.m; sourceTree = "<group>"; };
@@ -804,6 +816,12 @@
 				917667272B1C37164E85D72C /* User.m */,
 				A3CE884A1CDBA8AA00445D9A /* HummSettings.h */,
 				A3CE884B1CDBA8AA00445D9A /* HummSettings.m */,
+				A32824E51CEC788F00CC7160 /* PlaylistOwnerDictionary.h */,
+				A32824E61CEC788F00CC7160 /* PlaylistOwnerDictionary.m */,
+				A32824E91CEC793500CC7160 /* PlaylistOwnerArray.h */,
+				A32824EA1CEC793500CC7160 /* PlaylistOwnerArray.m */,
+				A32824ED1CEC797D00CC7160 /* PlaylistOwnerInt.h */,
+				A32824EE1CEC797D00CC7160 /* PlaylistOwnerInt.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1214,18 +1232,21 @@
 				FF13F1A0289F7E9A4F0D7C6E /* AFNetworkActivityIndicatorManager.h in Headers */,
 				E3FFCE246FA176405C688EAA /* AFNetworking-umbrella.h in Headers */,
 				ECB4290BF524F4EA565BB9EA /* AFNetworking.h in Headers */,
+				A32824EB1CEC793500CC7160 /* PlaylistOwnerArray.h in Headers */,
 				938D3A790A007D84C1DF1CB8 /* AFNetworkReachabilityManager.h in Headers */,
 				832CE09F4CB2C7EB09AC8EA9 /* AFSecurityPolicy.h in Headers */,
 				94A3DCBFE930F2A3D0079682 /* AFURLConnectionOperation.h in Headers */,
 				65708E0DCC2DED2BF7997A40 /* AFURLRequestSerialization.h in Headers */,
 				7BC320D5BEE4263A680E9B1E /* AFURLResponseSerialization.h in Headers */,
 				D980E8038551B66DF4AFAC84 /* AFURLSessionManager.h in Headers */,
+				A32824EF1CEC797D00CC7160 /* PlaylistOwnerInt.h in Headers */,
 				B5C83CFC0D874CBC43B7CB4E /* UIActivityIndicatorView+AFNetworking.h in Headers */,
 				7776F475D2E9E3DBBAD1FC42 /* UIAlertView+AFNetworking.h in Headers */,
 				3B2B29AEE900D0B780AB7227 /* UIButton+AFNetworking.h in Headers */,
 				A3CE884C1CDBA8AA00445D9A /* HummSettings.h in Headers */,
 				FC4DA6667780ECC701BB13D6 /* UIImage+AFNetworking.h in Headers */,
 				651509E668C666363A415706 /* UIImageView+AFNetworking.h in Headers */,
+				A32824E71CEC788F00CC7160 /* PlaylistOwnerDictionary.h in Headers */,
 				CE59468FDD3A766E8F6EF2D5 /* UIKit+AFNetworking.h in Headers */,
 				209411381E36EABB0ECD5343 /* UIProgressView+AFNetworking.h in Headers */,
 				D1152E2FE6DAD2759E0E0018 /* UIRefreshControl+AFNetworking.h in Headers */,
@@ -1668,7 +1689,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BA06E8706C2A5E0925C38D7 /* AFHTTPRequestOperation.m in Sources */,
+				A32824E81CEC788F00CC7160 /* PlaylistOwnerDictionary.m in Sources */,
 				C705C795EF8195DCB1385E0C /* AFHTTPRequestOperationManager.m in Sources */,
+				A32824F01CEC797D00CC7160 /* PlaylistOwnerInt.m in Sources */,
+				A32824EC1CEC793500CC7160 /* PlaylistOwnerArray.m in Sources */,
 				5AB6A3E26E05965867B9EF19 /* AFHTTPSessionManager.m in Sources */,
 				385D33055C6AEBEABCF7BC1D /* AFNetworkActivityIndicatorManager.m in Sources */,
 				6FC3B2B1C926D5893A9D3693 /* AFNetworking-dummy.m in Sources */,
