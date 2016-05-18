@@ -22,4 +22,12 @@
     return [NSString stringWithFormat:PLAYLIST_ENDPOINT, self._id ];
 
 }
+
+- (BOOL)isEqual:(id)other {
+    
+    Playlist *otherPlaylist = (Playlist *) other;
+    
+    return self._id == otherPlaylist._id;
+}
+
 @end

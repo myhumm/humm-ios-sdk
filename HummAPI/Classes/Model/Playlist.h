@@ -19,4 +19,6 @@
 //owner can be array or dictionary
 //@property (nonatomic, strong) NSArray *owner;
 
+- (NSString *) getCover;
+
 @end
