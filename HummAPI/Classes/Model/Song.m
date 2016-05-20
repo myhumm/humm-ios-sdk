@@ -60,5 +60,10 @@
     
 }
 
+-(NSString *) getYoutubeVideoImage
+{
+    return [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/0.jpg", self.getYoutubeId];
+}
+
 
 @end
