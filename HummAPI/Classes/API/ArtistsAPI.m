@@ -368,6 +368,7 @@
               limit:(NSInteger) limit
              offset:(NSInteger) offset
            songType:(NSString *) songType
+           live:(BOOL) live
             success:(void (^) (NSArray<Song *> *response)) success
               error:(void (^) (NSError *error)) error
 {
@@ -396,6 +397,8 @@
         {
             [parameters setObject:songType forKey:@"songType"];
         }
+        
+        [parameters setObject:[NSNumber numberWithBool:live] forKey:@"live"];
         
         
         [manager GET:[NSString stringWithFormat:@"%@/artists/%@/topsongs", self.humm.endPoint, idArtist]

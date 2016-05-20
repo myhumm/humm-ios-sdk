@@ -98,6 +98,9 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *tokenStored = [defaults objectForKey:@"token"];
         
+        self.token = tokenStored;
+        self.token_expires = [defaults integerForKey:@"token_expires"];
+
         //TODO: check to renew
         return tokenStored;
         

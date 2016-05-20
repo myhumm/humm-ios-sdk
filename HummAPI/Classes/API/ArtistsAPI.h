@@ -13,6 +13,11 @@
 
 @interface ArtistsAPI : HummAPI
 
+#define SONG_TYPE_COVER @"cover";
+#define SONG_TYPE_TRACK @"track";
+#define SONG_TYPE_VERSION @"version";
+#define SONG_TYPE_VIDEO @"video";
+
 -(void) get:(NSString *) idArtist
       limit:(NSInteger) limit
      offset:(NSInteger) offset
@@ -49,6 +54,7 @@
               limit:(NSInteger) limit
              offset:(NSInteger) offset
            songType:(NSString *) songType
+               live:(BOOL) live
             success:(void (^) (NSArray<Song *> *response)) success
               error:(void (^) (NSError *error)) error;
 
