@@ -395,7 +395,7 @@
         
         if (songType)
         {
-            [parameters setObject:songType forKey:@"songType"];
+            [parameters setObject:songType forKey:@"songtype"];
         }
         
         [parameters setObject:[NSNumber numberWithBool:live] forKey:@"live"];

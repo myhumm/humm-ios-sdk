@@ -1136,7 +1136,7 @@
                         
                     }
                     else {
-                        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                        error([NSError errorWithDomain:@"hummDomain" code:404 userInfo:responseObject[@"data_response"]]);
                     }
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
