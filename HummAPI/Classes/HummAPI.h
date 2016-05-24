@@ -65,5 +65,6 @@
 
 -(void) updateLoginDataWithLoginInfo:(LoginInfo *) loginInfo;
 -(NSString *) getToken;
+-(void) logout;
 
 @end

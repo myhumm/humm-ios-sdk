@@ -159,6 +159,15 @@
 
 }
 
+-(void) logout
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setNilValueForKey:@"token"];
+    [defaults setNilValueForKey:@"token_expires"];
+    [defaults synchronize];
+
+}
+
 - (UserAPI *) users {
     return [[UserAPI alloc] init];
 }
