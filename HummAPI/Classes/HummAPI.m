@@ -159,6 +159,15 @@
 
 }
 
+- (void)setToken:(NSString *)token
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setNilValueForKey:@"token"];
+    [defaults setNilValueForKey:@"token_expires"];
+    [defaults synchronize];
+
+}
+
 -(void) doLogout
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
