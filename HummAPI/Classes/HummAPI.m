@@ -159,7 +159,7 @@
 
 }
 
--(void) logout
+-(void) doLogout
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setNilValueForKey:@"token"];
