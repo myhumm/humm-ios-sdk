@@ -896,7 +896,7 @@
         manager.responseSerializer =[AFJSONResponseSerializer serializer];
         
         NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
-        
+        [parameters setObject:@"album" forKey:@"type"];
         if (!idUser)
         {
             error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
@@ -905,7 +905,7 @@
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
         [manager GET:[NSString stringWithFormat:@"%@/users/%@/subscriptions", self.humm.endPoint, idUser]
-          parameters:nil
+          parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
                  if (!responseObject) //no content
@@ -918,7 +918,7 @@
                  {
                      
                      NSError *err;
-                     NSArray<Subscription *> *playlists = [Subscription arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
+                     NSArray<Playlist *> *playlists = [Playlist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
                      
                      if (err)
                      {
