@@ -715,7 +715,7 @@
              {
                  
                  NSError *err;
-                 NSArray<Song *> *songs = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
+                 NSArray<Song *> *songs = [Song arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
                  
                  if (err)
                  {
