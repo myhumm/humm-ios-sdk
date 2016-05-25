@@ -874,6 +874,76 @@
     
 }
 
+-(void) getSubscriptions:(NSString *) idUser
+             success:(void (^) (NSArray<Subscription *> *response)) success
+               error:(void (^) (NSError *error)) error
+{
+    if (self.MODE_DEBUG)
+    {
+        [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+        [[AFNetworkActivityLogger sharedLogger] startLogging];
+
+    }
+    
+    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (!idUser)
+        {
+            error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+        }
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        [manager GET:[NSString stringWithFormat:@"%@/users/%@/subscriptions", self.humm.endPoint, idUser]
+          parameters:nil
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 
+                 if (!responseObject) //no content
+                 {
+                     success(nil);
+                     return;
+                 }
+                 
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                 {
+                     
+                     NSError *err;
+                     NSArray<Subscription *> *playlists = [Subscription arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
+                     
+                     if (err)
+                     {
+                         error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+                     }
+                     
+                     success(playlists);
+                 }
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+    }];
+    
+    
+}
+
+
 #define RESPONSE_PASSWORD_CHANGED @"Password changed"
 #define RESPONSE_USER_EXISTS @"User exists"
 

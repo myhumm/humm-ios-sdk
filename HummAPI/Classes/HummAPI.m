@@ -91,6 +91,17 @@
     
 }
 
+-(void) forceRefreshToken:(void (^) (void)) refreshSuccess
+                    error:(void (^) (NSError *error)) refreshError
+{
+    [[self users] refreshToken:^(LoginInfo *response) {
+        [self updateLoginDataWithLoginInfo:(response)];
+        refreshSuccess();
+    } error:^(NSError *error) {
+        refreshError(error);
+    }];
+    
+}
 -(NSString *) getToken
 {
     if (!self.token)
@@ -100,7 +111,7 @@
         
         self.token = tokenStored;
         self.token_expires = [defaults integerForKey:@"token_expires"];
-
+        
         //TODO: check to renew
         return tokenStored;
         
@@ -156,19 +167,19 @@
     [defaults setObject:self.token forKey:@"token"];
     [defaults setInteger:self.token_expires forKey:@"token_expires"];
     [defaults synchronize];
-
+    
 }
 
 -(void) doLogout
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setNilValueForKey:@"token"];
-//    [defaults setNilValueForKey:@"token_expires"];
+    //    [defaults setNilValueForKey:@"token"];
+    //    [defaults setNilValueForKey:@"token_expires"];
     [defaults setObject:nil forKey:@"token"];
     [defaults setObject:nil forKey:@"token_expires"];
-
+    
     [defaults synchronize];
-
+    
 }
 
 - (UserAPI *) users {

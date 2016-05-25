@@ -1,13 +1,13 @@
 use_frameworks!
 
-target 'HummAPI_Example', :exclusive => true do
-  pod 'HummAPI', :path => '../'
+target 'HummAPI_Example' do
   pod 'AFNetworking', '~> 2.5'
   pod 'JSONModel'
+  pod 'HummAPI', :path => '../'
 
 end
 
-target 'HummAPI_Tests', :exclusive => true do
+target 'HummAPI_Tests' do
   pod 'HummAPI', :path => '../'
   pod 'AFNetworking', '~> 2.5'
   pod 'JSONModel'

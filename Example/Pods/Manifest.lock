@@ -21,7 +21,9 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - Expecta (1.0.5)
-  - HummAPI (0.1.0)
+  - HummAPI (0.4.6):
+    - AFNetworking (~> 2.5)
+    - JSONModel
   - JSONModel (1.2.0)
   - Specta (1.0.5)
 
@@ -39,8 +41,10 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AFNetworking: cb8d14a848e831097108418f5d49217339d4eb60
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
-  HummAPI: b9ed5d726db200c2afc29610b3df359695b067f2
+  HummAPI: 4e8bb22099d85c2f5e49914b5fb2a5ba636b212f
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 1924da7ab74914fcb46e816bb1d08c3624e6961d
+
+COCOAPODS: 1.0.0

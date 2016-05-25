@@ -15,6 +15,7 @@
 #import "Artist.h"
 #import "Song.h"
 #import "HummSettings.h"
+#import "Subscription.h"
 
 @interface UserAPI : HummAPI
 
@@ -89,6 +90,11 @@
               offset:(NSInteger) offset
              success:(void (^) (NSArray<Playlist *> *response)) success
                error:(void (^) (NSError *error)) error;
+
+-(void) getSubscriptions:(NSString *) idUser
+                 success:(void (^) (NSArray<Subscription *> *response)) success
+                   error:(void (^) (NSError *error)) error;
+
 
 -(void) resetPassword: (NSString *) email
               success:(void (^) (BOOL response)) success

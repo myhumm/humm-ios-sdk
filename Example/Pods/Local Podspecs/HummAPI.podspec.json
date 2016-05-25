@@ -1,8 +1,8 @@
 {
   "name": "HummAPI",
-  "version": "0.1.0",
+  "version": "0.4.6",
   "summary": "Your free music service.",
-  "description": "",
+  "description": "pod to humm API",
   "homepage": "https://github.com/myhumm/humm-ios-sdk",
   "license": "MIT",
   "authors": {
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/myhumm/humm-ios-sdk",
-    "tag": "0.1.0"
+    "tag": "0.4.6"
   },
   "platforms": {
     "ios": "8.0"
@@ -19,6 +19,14 @@
   "resource_bundles": {
     "HummAPI": [
       "HummAPI/Assets/*.png"
+    ]
+  },
+  "dependencies": {
+    "JSONModel": [
+
+    ],
+    "AFNetworking": [
+      "~> 2.5"
     ]
   }
 }
