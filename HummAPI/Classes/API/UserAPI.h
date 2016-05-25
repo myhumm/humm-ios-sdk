@@ -82,7 +82,7 @@
 -(void) getFollows:(NSString *) idUser
                limit:(NSInteger) limit
               offset:(NSInteger) offset
-             success:(void (^) (NSArray<User *> *response)) success
+             success:(void (^) (NSArray<Artist *> *response)) success
                error:(void (^) (NSError *error)) error;
 
 -(void) getPlaylists:(NSString *) idUser

@@ -737,7 +737,7 @@
 -(void) getFollows:(NSString *) idUser
              limit:(NSInteger) limit
             offset:(NSInteger) offset
-           success:(void (^) (NSArray<User *> *response)) success
+           success:(void (^) (NSArray<Artist *> *response)) success
              error:(void (^) (NSError *error)) error
 {
     
@@ -775,14 +775,14 @@
                  {
                      
                      NSError *err;
-                     NSArray<User *> *users = [User arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
+                     NSArray<Artist *> *artists = [Artist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
                      
                      if (err)
                      {
                          error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
                      }
                      
-                     success(users);
+                     success(artists);
                  }
                  else {
                      error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
