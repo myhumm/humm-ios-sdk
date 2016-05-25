@@ -9,6 +9,7 @@
 #import "UserAPI.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "AFNetworkActivityLogger.h"
+#import "PlaylistOwnerInt.h"
 
 @interface UserAPI()
 
@@ -805,7 +806,7 @@
 -(void) getPlaylists:(NSString *) idUser
                limit:(NSInteger) limit
               offset:(NSInteger) offset
-             success:(void (^) (NSArray<Playlist *> *response)) success
+             success:(void (^) (NSArray<PlaylistOwnerInt *> *response)) success
                error:(void (^) (NSError *error)) error
 {
     [self.humm updateUserToken:^{
@@ -848,7 +849,7 @@
                  {
                      
                      NSError *err;
-                     NSArray<Playlist *> *playlists = [Playlist arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
+                     NSArray<PlaylistOwnerInt *> *playlists = [PlaylistOwnerInt arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
                      
                      if (err)
                      {

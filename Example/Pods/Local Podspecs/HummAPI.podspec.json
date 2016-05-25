@@ -1,6 +1,6 @@
 {
   "name": "HummAPI",
-  "version": "0.4.6",
+  "version": "0.4.9",
   "summary": "Your free music service.",
   "description": "pod to humm API",
   "homepage": "https://github.com/myhumm/humm-ios-sdk",
@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/myhumm/humm-ios-sdk",
-    "tag": "0.4.6"
+    "tag": "0.4.9"
   },
   "platforms": {
     "ios": "8.0"

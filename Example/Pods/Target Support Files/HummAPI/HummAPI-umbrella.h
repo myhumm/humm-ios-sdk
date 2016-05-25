@@ -11,6 +11,7 @@
 #import "HummSettings.h"
 #import "LoginInfo.h"
 #import "Playlist.h"
+#import "PlaylistOwnerInt.h"
 #import "Song.h"
 #import "Subscription.h"
 #import "User.h"

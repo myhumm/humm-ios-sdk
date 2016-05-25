@@ -98,4 +98,12 @@
     return nil;
 }
 
+- (BOOL)isEqual:(id)other {
+    
+    Artist *otherArtist = (Artist *) other;
+    
+    return [self._id isEqualToString:otherArtist._id];
+}
+
+
 @end
