@@ -49,8 +49,14 @@
             error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
         }
         
-        [parameters setObject:description forKey:@"description"];
-        [parameters setObject:title forKey:@"title"];
+        if (description)
+        {
+            [parameters setObject:description forKey:@"description"];
+        }
+        if (title)
+        {
+            [parameters setObject:title forKey:@"title"];
+        }
         
         [parameters setObject:[NSNumber numberWithBool:private] forKey:@"private"];
         
@@ -66,7 +72,7 @@
                   {
                       
                       NSError *err;
-                      Playlist *playlist = [[Playlist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                      PlaylistOwnerInt *playlist = [[PlaylistOwnerInt alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
                       
                       if (err)
                       {
@@ -977,9 +983,9 @@
 }
 
 -(void) getStaffPicksWithlimit:(NSInteger) limit
-                   offset:(NSInteger) offset
-                  success:(void (^) (NSArray<Playlist *> *response)) success
-                    error:(void (^) (NSError *error)) error
+                        offset:(NSInteger) offset
+                       success:(void (^) (NSArray<Playlist *> *response)) success
+                         error:(void (^) (NSError *error)) error
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -1040,7 +1046,7 @@
         error(e);
         
     }];
-
+    
 }
 
 @end
