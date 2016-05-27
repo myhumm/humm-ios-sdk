@@ -45,4 +45,11 @@
            success:(void (^) ( NSArray<Song *>  *response)) success
              error:(void (^) (NSError *error)) error;
 
+-(void) searchWithKeyword:(NSString *) keyword
+                    limit:(NSInteger) limit
+                   offset:(NSInteger) offset
+                    genre:(NSString *) genre
+                  success:(void (^) (NSArray<Song *> *response)) success
+                    error:(void (^) (NSError *error)) error;
+
 @end

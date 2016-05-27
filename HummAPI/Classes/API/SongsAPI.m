@@ -437,4 +437,93 @@
     
 }
 
+
+
+-(void) searchWithKeyword:(NSString *) keyword
+                    limit:(NSInteger) limit
+                   offset:(NSInteger) offset
+                    genre:(NSString *) genre
+                  success:(void (^) (NSArray<Song *> *response)) success
+                    error:(void (^) (NSError *error)) error
+{
+    
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer =[AFJSONResponseSerializer serializer];
+    
+    NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+    
+    [self.humm updateUserToken:^{
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
+        
+        if (!keyword)
+        {
+            error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+        }
+        
+        [parameters setObject:keyword forKey:@"keyword"];
+        
+        if (limit > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:limit] forKey:@"limit"];
+        }
+        
+        if (offset > 0)
+        {
+            [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
+        }
+        
+        if (genre)
+        {
+            [parameters setObject:genre forKey:@"genre"];
+
+        }
+        
+        
+        [manager GET:[NSString stringWithFormat:@"%@/songs", self.humm.endPoint]
+          parameters:parameters
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 
+                 if (!responseObject)
+                 {
+                     success (nil);
+                     return ;
+                 }
+                 
+                 if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                 {
+                     
+                     NSError *err;
+                     
+                     NSArray<Song *> *songs = [Song arrayOfModelsFromDictionaries:responseObject[@"data_response"] error:&err];
+                     
+                     if (err)
+                     {
+                         error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+                     }
+                     
+                     success(songs);
+                 }
+                 else {
+                     error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                 }
+                 
+             } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 NSLog(@"error = %@", [e localizedDescription]);
+                 error(e);
+             }];
+        
+    } onUpdatedError:^(NSError *e) {
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    
+    
+    
+}
+
+
 @end
