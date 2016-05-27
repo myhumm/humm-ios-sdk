@@ -498,19 +498,18 @@
     [self.humm updateUserToken:^{
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
-        if ((!idPlaylist) || (!idSong))
+        if ((!idPlaylist) || (!idSong) || position < 0)
         {
             error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
         }
         
         [parameters setObject:idSong forKey:@"sid"];
+        [parameters setObject:[NSNumber numberWithInteger:position] forKey:@"offset"];
         
-        if (position >= 0)
-        {
-            [parameters setObject:[NSNumber numberWithInteger:position] forKey:@"offset"];
-        }
         
-        [manager POST:[NSString stringWithFormat:@"%@/playlists/%@/songs", self.humm.endPoint, idPlaylist]
+        NSString *url = [NSString stringWithFormat:@"%@/playlists/%@/songs?sid=%@&offset=%@", self.humm.endPoint, idPlaylist, idSong, position];
+        //        [manager POST:[NSString stringWithFormat:@"%@/playlists/%@/songs", self.humm.endPoint, idPlaylist]
+        [manager POST:url
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   
@@ -531,8 +530,9 @@
                       {
                           error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
                       }
-                      
-                      success(playlist);
+                      else {
+                          success(playlist);
+                      }
                   }
                   else {
                       error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);

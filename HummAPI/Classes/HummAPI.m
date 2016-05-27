@@ -190,7 +190,7 @@
     return [[ArtistsAPI alloc] init];
 }
 
-- (SongsAPI *) songs {
+- (SongsAPI *) songAPI {
     return [[SongsAPI alloc] init];
 }
 
