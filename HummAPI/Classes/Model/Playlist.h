@@ -15,6 +15,9 @@
 
 @property (nonatomic, strong) NSDictionary *stats;
 @property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *playlistDescription;
+@property (nonatomic) BOOL playlistPrivate;
+
 @property (nonatomic, strong) NSArray *contributors;
 //owner can be array or dictionary
 @property (nonatomic, strong) NSArray* owner;
