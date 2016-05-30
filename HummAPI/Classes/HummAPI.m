@@ -19,12 +19,15 @@
     static HummAPI *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedMyManager = [[self alloc] init];
-        sharedMyManager.endPoint = @"http://api.myhumm.com/v2";
-        sharedMyManager.grantType = @"password";
-        sharedMyManager.clientId = @"5433be703acd3952a3e9ec28";
-        sharedMyManager.token_expires = 0;
-        sharedMyManager.MODE_DEBUG = NO;
+        if (!sharedMyManager)
+        {
+            sharedMyManager = [[self alloc] init];
+            sharedMyManager.endPoint = @"http://api.myhumm.com/v2";
+            sharedMyManager.grantType = @"password";
+            sharedMyManager.clientId = @"5433be703acd3952a3e9ec28";
+            sharedMyManager.token_expires = 0;
+            sharedMyManager.MODE_DEBUG = NO;
+        }
     });
     return sharedMyManager;
 }
