@@ -297,13 +297,16 @@
     
     NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
     
-    if ((!description) || (!title) || (!idPlaylist))
+    if ((!title) || (!idPlaylist))
     {
         error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
     }
     
     
-    [parameters setObject:description forKey:@"description"];
+    if (description)
+    {
+        [parameters setObject:description forKey:@"description"];
+    }
     [parameters setObject:title forKey:@"title"];
     [parameters setObject:[NSNumber numberWithBool:private] forKey:@"private"];
     

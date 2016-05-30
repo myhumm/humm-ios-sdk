@@ -18,6 +18,18 @@
     return YES;
 }
 
++(JSONKeyMapper*)keyMapper
+{
+    return [[JSONKeyMapper alloc] initWithDictionary:@{
+                                                       @"_id": @"_id",
+                                                       @"stats": @"stats",
+                                                       @"title": @"title",
+                                                       @"description": @"playlistDescription",
+                                                       @"private": @"playlistPrivate"
+                                                       }];
+}
+
+
 - (NSString *) getCover
 {
     return [NSString stringWithFormat:PLAYLIST_ENDPOINT, self._id ];
