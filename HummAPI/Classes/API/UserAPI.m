@@ -93,11 +93,13 @@
                   self.humm.clientId, @"client_id",
                   nil];
     
-//    NSString *url = [NSString stringWithFormat:@"%@/loginWithService", self.humm.endPoint];
+    //    NSString *url = [NSString stringWithFormat:@"%@/loginWithService", self.humm.endPoint];
     
-    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-
+    if (self.MODE_DEBUG)
+    {
+        [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+        [[AFNetworkActivityLogger sharedLogger] startLogging];
+    }
     NSString *url = [NSString stringWithFormat:@"%@/loginWithService?userId=%@&grant_type=%@&client_id=%@", self.humm.endPoint, userId, self.humm.grantType, self.humm.clientId];
     
     [manager POST:url
@@ -155,7 +157,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/users/signup?username=%@&password=%@&email=%@&firstname=%@&lastname=%@&referal=%@&client_id=%@", self.humm.endPoint, username, password, email, firstName, lastName, referal, self.humm.clientId];
     
-//    NSString *url = [NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint];
+    //    NSString *url = [NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint];
     
     //[manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
     
@@ -164,8 +166,8 @@
         [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
         [[AFNetworkActivityLogger sharedLogger] startLogging];
     }
-
-//     [manager POST:[NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint]
+    
+    //     [manager POST:[NSString stringWithFormat:@"%@/users/signup", self.humm.endPoint]
     [manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -304,7 +306,7 @@
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-//                 NSLog(@"response %@", responseObject);
+                 //                 NSLog(@"response %@", responseObject);
                  
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
@@ -876,19 +878,19 @@
 }
 
 -(void) getSubscriptions:(NSString *) idUser
-             success:(void (^) (NSArray<Subscription *> *response)) success
-               error:(void (^) (NSError *error)) error
+                 success:(void (^) (NSArray<Subscription *> *response)) success
+                   error:(void (^) (NSError *error)) error
 {
     if (self.MODE_DEBUG)
     {
         [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
         [[AFNetworkActivityLogger sharedLogger] startLogging];
-
+        
     }
     
-    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-
+    //    [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
+    //    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -1132,7 +1134,7 @@
         
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
-//        NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint];
+        //        NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint];
         NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services?service=%@&sid=%@&token=%@&uname=%@&secret=%@", self.humm.endPoint, serviceName, serviceId, serviceToken, serviceUsername, serviceUsername];
         
         [manager POST:url
@@ -1194,7 +1196,7 @@
         
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token]
                          forHTTPHeaderField:@"Authorization"];
-
+        
         
         [manager DELETE:[NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint]
              parameters:parameters
@@ -1247,7 +1249,7 @@
         
         NSDictionary *genres = [NSDictionary dictionaryWithObjectsAndKeys:likes, @"like",dislikes, @"dislike", nil];
         
-//        [parameters setObject:@"preferences", genres];
+        //        [parameters setObject:@"preferences", genres];
         [parameters setObject:genres forKey:@"preferences"];
         
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token]
@@ -1255,30 +1257,30 @@
         
         
         [manager PATCH:[NSString stringWithFormat:@"%@/users/me/settings", self.humm.endPoint]
-             parameters:parameters
-                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    
-                    if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-                    {
-                        LoginInfo * settings = responseObject[@"data_response"];
-                        success(settings);
-                        
-                    }
-                    else {
-                        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-                    }
-                    
-                } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-                    NSLog(@"error = %@", [e localizedDescription]);
-                    error(e);
-                }];
+            parameters:parameters
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   
+                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                   {
+                       LoginInfo * settings = responseObject[@"data_response"];
+                       success(settings);
+                       
+                   }
+                   else {
+                       error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                   }
+                   
+               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                   NSLog(@"error = %@", [e localizedDescription]);
+                   error(e);
+               }];
         
     } onUpdatedError:^(NSError *e) {
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
     }];
-
+    
 }
 
 @end
