@@ -15,9 +15,13 @@
 
 -(void) create:(NSString *) description
        private:(BOOL) private
-    title:(NSString *) title
-    success:(void (^) (PlaylistOwnerInt *response)) success
-    error:(void (^) (NSError *error)) error;
+title:(NSString *) title
+success:(void (^) (PlaylistOwnerInt *response)) success
+error:(void (^) (NSError *error)) error;
+
+-(void) deletePlaylist:(NSString *) description
+               success:(void (^) (PlaylistOwnerInt *response)) success
+                 error:(void (^) (NSError *error)) error;
 
 -(void) getFeaturedWithLimit:(NSInteger) limit
                       offset:(NSInteger) offset
