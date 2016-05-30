@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSDictionary *stats;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSArray *contributors;
+@property (nonatomic, strong) NSString *playlistDescription;
+@property (nonatomic) BOOL playlistPrivate;
 
 
 - (NSString *) getCover;

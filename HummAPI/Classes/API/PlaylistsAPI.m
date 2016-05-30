@@ -324,7 +324,7 @@
                {
                    
                    NSError *err;
-                   Playlist *playlist = [[Playlist alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                   PlaylistOwnerInt *playlist = [[PlaylistOwnerInt alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
                    
                    if (err)
                    {
