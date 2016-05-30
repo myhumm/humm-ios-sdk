@@ -19,9 +19,9 @@ title:(NSString *) title
 success:(void (^) (PlaylistOwnerInt *response)) success
 error:(void (^) (NSError *error)) error;
 
--(void) deletePlaylist:(NSString *) description
-               success:(void (^) (PlaylistOwnerInt *response)) success
-                 error:(void (^) (NSError *error)) error;
+-(void) deletePlaylistWithId:(NSString *) description
+                     success:(void (^) (PlaylistOwnerInt *response)) success
+                       error:(void (^) (NSError *error)) error;
 
 -(void) getFeaturedWithLimit:(NSInteger) limit
                       offset:(NSInteger) offset
