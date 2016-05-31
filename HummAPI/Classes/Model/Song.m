@@ -65,5 +65,17 @@
     return [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/0.jpg", self.getYoutubeId];
 }
 
+#define PLAYLIST_ENDPOINT @"http://wave.livingindietv.com/images/playlist?id=%@&size=thumb"
+
+
+-(NSString *) getPlaylistCover
+{
+    if (self.playlists)
+    {
+        NSString *idPlaylist = [self.playlists firstObject][@"pid"];
+        return [NSString stringWithFormat:@"%@/%@", PLAYLIST_ENDPOINT, idPlaylist];
+    }
+    return nil;
+}
 
 @end
