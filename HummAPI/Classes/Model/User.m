@@ -33,7 +33,7 @@
     
     for (NSDictionary *dictionary in self.favourites)
     {
-        [result addObject:dictionary[@"id"]];
+        [result addObject:dictionary[@"sid"]];
     }
     
     return [result copy];
