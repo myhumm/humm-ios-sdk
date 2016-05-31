@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "HummAPI"
-  s.version          = "0.5.7"
+  s.version          = "0.5.8"
   s.summary          = "Your free music service."
 
 # This description is used to generate tags and improve search results.

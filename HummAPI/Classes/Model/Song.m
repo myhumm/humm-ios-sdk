@@ -73,7 +73,7 @@
     if (self.playlists)
     {
         NSString *idPlaylist = [self.playlists firstObject][@"pid"];
-        return [NSString stringWithFormat:@"%@/%@", PLAYLIST_ENDPOINT, idPlaylist];
+        return [NSString stringWithFormat:@"http://wave.livingindietv.com/images/playlist?id=%@&size=thumb", idPlaylist];
     }
     return nil;
 }
