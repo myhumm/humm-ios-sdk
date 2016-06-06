@@ -38,7 +38,7 @@
         error:(void (^) (NSError *error)) error
 
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -71,7 +71,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/radio", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -97,12 +97,14 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];
@@ -114,7 +116,7 @@
                  error:(void (^) (NSError *error)) error
 
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -131,7 +133,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/radio", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -157,12 +159,14 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];

@@ -37,6 +37,8 @@
                      success:(void (^) (LoginInfo *response)) success
                        error:(void (^) (NSError *error)) error
 {
+    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -56,7 +58,7 @@
     [manager POST:url
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
+              [self setNetworkActivityIndicatorVisible:NO];
               if ([@"ok" isEqualToString:responseObject[@"status_response"]])
               {
                   NSError* err = nil;
@@ -68,6 +70,7 @@
               }
               
           } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+              [self setNetworkActivityIndicatorVisible:NO];
               NSLog(@"error = %@", [e localizedDescription]);
               
               error(e);
@@ -79,7 +82,7 @@
             onLoginError:(void (^) (NSError *error)) loginError
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -105,7 +108,7 @@
     [manager POST:url
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
+              [self setNetworkActivityIndicatorVisible:NO];
               if (!responseObject)
               {
                   loginSuccess(nil);
@@ -123,6 +126,7 @@
               }
               
           } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+              [self setNetworkActivityIndicatorVisible:NO];
               NSLog(@"error = %@", [e localizedDescription]);
               loginError(e);
           }];
@@ -138,6 +142,8 @@
                       success:(void (^) (LoginInfo *response)) success
                         error:(void (^) (NSError *error)) error
 {
+    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -171,7 +177,7 @@
     [manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
        parameters:parameters
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              
+              [self setNetworkActivityIndicatorVisible:NO];
               if ([@"ok" isEqualToString:responseObject[@"status_response"]])
               {
                   NSError* err = nil;
@@ -183,6 +189,7 @@
               }
               
           } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+              [self setNetworkActivityIndicatorVisible:NO];
               NSLog(@"error = %@", [e localizedDescription]);
               
               error(e);
@@ -237,7 +244,7 @@
 -(void) me:(void (^) (User *response)) success
      error:(void (^) (NSError *error)) error
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -249,7 +256,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/users/me", self.humm.endPoint]
           parameters:nil
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"response %@", responseObject);
                  
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
@@ -263,12 +270,14 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -282,6 +291,7 @@
                           success:(void (^) (NSArray<Playlist *> *response)) success
                             error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -307,7 +317,7 @@
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
                  //                 NSLog(@"response %@", responseObject);
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      NSError *error;
@@ -325,11 +335,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];
@@ -341,6 +353,7 @@
                          success:(void (^) (NSArray<Artist *> *response)) success
                            error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -365,8 +378,7 @@
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 NSLog(@"response %@", responseObject);
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      NSError *error;
@@ -384,11 +396,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -402,6 +416,7 @@
                            success:(void (^) (NSArray<Playlist *> *response)) success
                              error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -426,8 +441,7 @@
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
-                 NSLog(@"response %@", responseObject);
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      NSError *error;
@@ -445,11 +459,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -462,6 +478,7 @@
               success:(void (^) (Song *response)) success
                 error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -481,8 +498,7 @@
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   
-                  NSLog(@"response %@", responseObject);
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
                       
@@ -501,11 +517,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -519,6 +537,7 @@
            success:(void (^) (User *response)) success
              error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -538,8 +557,7 @@
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   
-                  NSLog(@"response %@", responseObject);
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
                       
@@ -558,11 +576,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];
@@ -574,6 +594,7 @@
               success:(void (^) (User *response)) success
                 error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -592,7 +613,7 @@
         [manager DELETE:[NSString stringWithFormat:@"%@/users/%@/follows", self.humm.endPoint, idUser]
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    
+                    [self setNetworkActivityIndicatorVisible:NO];
                     if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                     {
                         
@@ -611,11 +632,13 @@
                     }
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                    [self setNetworkActivityIndicatorVisible:NO];
                     NSLog(@"error = %@", [e localizedDescription]);
                     error(e);
                 }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -628,6 +651,7 @@
     success:(void (^) (User *response)) success
       error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -646,7 +670,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/users/%@", self.humm.endPoint, idUser]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      
@@ -665,11 +689,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -684,6 +710,7 @@
               success:(void (^) (NSArray<Song *> *response)) success
                 error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -712,7 +739,7 @@
     [manager GET:[NSString stringWithFormat:@"%@/users/%@/favourites", self.humm.endPoint, idUser]
       parameters:parameters
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             
+             [self setNetworkActivityIndicatorVisible:NO];
              if ([@"ok" isEqualToString:responseObject[@"status_response"]])
              {
                  
@@ -731,6 +758,7 @@
              }
              
          } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+             [self setNetworkActivityIndicatorVisible:NO];
              NSLog(@"error = %@", [e localizedDescription]);
              error(e);
          }];
@@ -743,7 +771,7 @@
            success:(void (^) (NSArray<Artist *> *response)) success
              error:(void (^) (NSError *error)) error
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -773,7 +801,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/users/%@/follows", self.humm.endPoint, idUser]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      
@@ -792,11 +820,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -811,6 +841,7 @@
              success:(void (^) (NSArray<PlaylistOwnerInt *> *response)) success
                error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -840,7 +871,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/users/%@/playlists", self.humm.endPoint, idUser]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject) //no content
                  {
                      success(nil);
@@ -865,11 +896,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];
@@ -881,6 +914,7 @@
                  success:(void (^) (NSArray<Subscription *> *response)) success
                    error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     if (self.MODE_DEBUG)
     {
         [AFNetworkActivityLogger sharedLogger].level = AFLoggerLevelDebug;
@@ -909,7 +943,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/users/%@/subscriptions", self.humm.endPoint, idUser]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject) //no content
                  {
                      success(nil);
@@ -934,11 +968,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];
@@ -954,7 +990,7 @@
               success:(void (^) (BOOL response)) success
                 error:(void (^) (NSError *error)) error
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -971,7 +1007,7 @@
         [manager POST:[NSString stringWithFormat:@"%@/users/reset", self.humm.endPoint]
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
                       if ([responseObject[@"data_response"] isEqualToString:RESPONSE_PASSWORD_CHANGED])
@@ -987,11 +1023,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -1003,7 +1041,7 @@
            success:(void (^) (BOOL response)) success
              error:(void (^) (NSError *error)) error
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -1020,7 +1058,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/users/checkemail", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      if ([responseObject[@"data_response"] isEqualToString:RESPONSE_USER_EXISTS])
@@ -1036,11 +1074,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -1051,7 +1091,7 @@
               success:(void (^) (BOOL response)) success
                 error:(void (^) (NSError *error)) error
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -1068,7 +1108,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/users/checkusername", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      if ([responseObject[@"data_response"] isEqualToString:RESPONSE_USER_EXISTS])
@@ -1084,11 +1124,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -1104,7 +1146,7 @@
                           success:(void (^) (HummSettings * response)) success
                             error:(void (^) (NSError *error)) error
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -1140,7 +1182,7 @@
         [manager POST:url
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
                       HummSettings * settings = responseObject[@"data_response"];
@@ -1152,11 +1194,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
     }];
@@ -1168,7 +1212,7 @@
               success:(void (^) (LoginInfo * response)) success
                 error:(void (^) (NSError *error)) error
 {
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -1201,7 +1245,7 @@
         [manager DELETE:[NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint]
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    
+                    [self setNetworkActivityIndicatorVisible:NO];
                     if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                     {
                         LoginInfo * settings = responseObject[@"data_response"];
@@ -1213,11 +1257,13 @@
                     }
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                    [self setNetworkActivityIndicatorVisible:NO];
                     NSLog(@"error = %@", [e localizedDescription]);
                     error(e);
                 }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -1230,6 +1276,7 @@
           success:(void (^) (LoginInfo * response)) success
             error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -1259,7 +1306,7 @@
         [manager PATCH:[NSString stringWithFormat:@"%@/users/me/settings", self.humm.endPoint]
             parameters:parameters
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   
+                   [self setNetworkActivityIndicatorVisible:NO];
                    if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                    {
                        LoginInfo * settings = responseObject[@"data_response"];
@@ -1271,11 +1318,13 @@
                    }
                    
                } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                   [self setNetworkActivityIndicatorVisible:NO];
                    NSLog(@"error = %@", [e localizedDescription]);
                    error(e);
                }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         

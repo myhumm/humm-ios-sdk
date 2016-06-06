@@ -66,5 +66,6 @@
 -(void) updateLoginDataWithLoginInfo:(LoginInfo *) loginInfo;
 -(NSString *) getToken;
 -(void) doLogout;
+- (void)setNetworkActivityIndicatorVisible:(BOOL)setVisible;
 
 @end

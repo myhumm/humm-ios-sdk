@@ -36,6 +36,7 @@
        success:(void (^) (Playlist *response)) success
          error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -67,7 +68,7 @@
         [manager POST:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
                       
@@ -86,11 +87,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -103,6 +106,7 @@
                success:(void (^) (PlaylistOwnerInt *response)) success
                  error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -116,7 +120,7 @@
         [manager DELETE:[NSString stringWithFormat:@"%@/playlists/%@", self.humm.endPoint, idPlaylist]
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
                       
@@ -135,11 +139,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -153,6 +159,7 @@
                      success:(void (^) (NSArray<Playlist *> *response)) success
                        error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
@@ -177,7 +184,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/playlists/featured", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -203,11 +210,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -222,7 +231,7 @@
       error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -242,7 +251,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/playlists/%@", self.humm.endPoint, idPlaylist]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -268,12 +277,14 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -290,6 +301,7 @@
        success:(void (^) (Playlist *response)) success
          error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -319,7 +331,7 @@
     [manager PATCH:[url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet]
         parameters:parameters
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               
+               [self setNetworkActivityIndicatorVisible:NO];
                if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                {
                    
@@ -338,6 +350,7 @@
                }
                
            } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+               [self setNetworkActivityIndicatorVisible:NO];
                NSLog(@"error = %@", [e localizedDescription]);
                error(e);
            }];
@@ -350,7 +363,7 @@
         error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -372,7 +385,7 @@
         [manager PATCH:[NSString stringWithFormat:@"%@/playlists/%@/reorder", self.humm.endPoint, idPlaylist]
             parameters:parameters
                success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                   
+                   [self setNetworkActivityIndicatorVisible:NO];
                    if (!responseObject)
                    {
                        success (nil);
@@ -398,11 +411,13 @@
                    }
                    
                } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                   [self setNetworkActivityIndicatorVisible:NO];
                    NSLog(@"error = %@", [e localizedDescription]);
                    error(e);
                }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -419,10 +434,11 @@
     
     [parameters setObject:songs forKey:@"songs"];
     
+    [self setNetworkActivityIndicatorVisible:YES];
     [manager PATCH:[NSString stringWithFormat:@"%@/playlists/%@/reorder", self.humm.endPoint, idPlaylist]
         parameters:parameters
            success:^(AFHTTPRequestOperation *operation, id responseObject) {
-               
+               [self setNetworkActivityIndicatorVisible:NO];
                if (!responseObject)
                {
                    success (nil);
@@ -448,6 +464,7 @@
                }
                
            } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+               [self setNetworkActivityIndicatorVisible:NO];
                NSLog(@"error = %@", [e localizedDescription]);
                error(e);
            }];
@@ -461,7 +478,7 @@
            error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -491,7 +508,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/playlists/%@/songs", self.humm.endPoint, idPlaylist]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -517,11 +534,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -538,7 +557,7 @@
           error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -563,7 +582,7 @@
         [manager POST:url
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if (!responseObject)
                   {
                       success (nil);
@@ -590,11 +609,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -610,7 +631,7 @@
              error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -630,7 +651,7 @@
         [manager DELETE:[NSString stringWithFormat:@"%@/playlists/%@/songs", self.humm.endPoint, idPlaylist]
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    
+                    [self setNetworkActivityIndicatorVisible:NO];
                     if (!responseObject)
                     {
                         success (nil);
@@ -656,11 +677,13 @@
                     }
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                    [self setNetworkActivityIndicatorVisible:NO];
                     NSLog(@"error = %@", [e localizedDescription]);
                     error(e);
                 }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -675,7 +698,7 @@
                 error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -695,7 +718,7 @@
         [manager POST:[NSString stringWithFormat:@"%@/playlists/%@/subscribers", self.humm.endPoint, idPlaylist]
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  
+                  [self setNetworkActivityIndicatorVisible:NO];
                   if (!responseObject)
                   {
                       success (nil);
@@ -721,11 +744,13 @@
                   }
                   
               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                  [self setNetworkActivityIndicatorVisible:NO];
                   NSLog(@"error = %@", [e localizedDescription]);
                   error(e);
               }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -740,7 +765,7 @@
                    error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -759,7 +784,7 @@
         [manager DELETE:[NSString stringWithFormat:@"%@/playlists/%@/subscribers", self.humm.endPoint, idPlaylist]
              parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                    
+                    [self setNetworkActivityIndicatorVisible:NO];
                     if (!responseObject)
                     {
                         success (nil);
@@ -785,11 +810,13 @@
                     }
                     
                 } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                    [self setNetworkActivityIndicatorVisible:NO];
                     NSLog(@"error = %@", [e localizedDescription]);
                     error(e);
                 }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -806,7 +833,7 @@
                       error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -841,7 +868,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/playlists/popular", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -867,11 +894,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -887,7 +916,7 @@
                      error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -912,7 +941,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/playlists/recent", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -938,11 +967,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -960,7 +991,7 @@
                     error:(void (^) (NSError *error)) error
 {
     
-    
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -993,7 +1024,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/playlists", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -1019,11 +1050,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
@@ -1038,6 +1071,7 @@
                        success:(void (^) (NSArray<Playlist *> *response)) success
                          error:(void (^) (NSError *error)) error
 {
+    [self setNetworkActivityIndicatorVisible:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -1062,7 +1096,7 @@
         [manager GET:[NSString stringWithFormat:@"%@/playlists/staffpicks", self.humm.endPoint]
           parameters:parameters
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                 
+                 [self setNetworkActivityIndicatorVisible:NO];
                  if (!responseObject)
                  {
                      success (nil);
@@ -1088,11 +1122,13 @@
                  }
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                 [self setNetworkActivityIndicatorVisible:NO];
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
         
     } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
         NSLog(@"error = %@", [e localizedDescription]);
         error(e);
         
