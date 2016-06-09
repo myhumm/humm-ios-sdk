@@ -59,14 +59,7 @@
             [parameters setObject:title forKey:@"title"];
         }
         
-        if (private)
-        {
-            [parameters setObject:@"true" forKey:@"private"];
-        }
-        else {
-            [parameters setObject:@"false" forKey:@"private"];
-        }
-        
+        private ? [parameters setObject:@"true" forKey:@"private"] : [parameters setObject:@"false" forKey:@"private"];
         
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
@@ -328,14 +321,7 @@
     }
     [parameters setObject:title forKey:@"title"];
     
-    if (private)
-    {
-        [parameters setObject:@"true" forKey:@"private"];
-        
-    }
-    else {
-        [parameters setObject:@"true" forKey:@"private"];
-    }
+    private ? [parameters setObject:@"true" forKey:@"private"] : [parameters setObject:@"false" forKey:@"private"];
     
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
     
@@ -1034,13 +1020,7 @@
             [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
         }
         
-        if (album)
-        {
-            [parameters setObject:@"true" forKey:@"album"];
-        }
-        else {
-            [parameters setObject:@"false" forKey:@"album"];
-        }
+        album ? [parameters setObject:@"true" forKey:@"album"] : [parameters setObject:@"false" forKey:@"album"];
         
         [manager GET:[NSString stringWithFormat:@"%@/playlists", self.humm.endPoint]
           parameters:parameters

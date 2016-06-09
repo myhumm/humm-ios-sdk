@@ -420,10 +420,8 @@
             [parameters setObject:@"true" forKey:@"live"];
         }
         else {
-            [parameters setObject:@"true" forKey:@"live"];
+            [parameters setObject:@"false" forKey:@"live"];
         }
-        
-        
         
         [manager GET:[NSString stringWithFormat:@"%@/artists/%@/topsongs", self.humm.endPoint, idArtist]
           parameters:parameters

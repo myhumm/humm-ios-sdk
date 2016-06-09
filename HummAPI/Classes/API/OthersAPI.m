@@ -66,8 +66,9 @@
             [parameters setObject:moods forKey:@"moods"];
         }
         
-        [parameters setObject:@"true" forKey:@"discovery"];
-        [parameters setObject:@"true" forKey:@"own"];
+        
+        discovery ? [parameters setObject:@"true" forKey:@"discovery"] : [parameters setObject:@"false" forKey:@"discovery"];
+        own ? [parameters setObject:@"true" forKey:@"own"] : [parameters setObject:@"false" forKey:@"own"];
         
         [manager GET:[NSString stringWithFormat:@"%@/radio", self.humm.endPoint]
           parameters:parameters
