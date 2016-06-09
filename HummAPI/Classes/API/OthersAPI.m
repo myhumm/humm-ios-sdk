@@ -8,6 +8,7 @@
 
 #import "OthersAPI.h"
 #import "AFHTTPRequestOperationManager.h"
+#import "AFNetworkActivityLogger.h"
 
 @interface OthersAPI()
 
@@ -65,8 +66,8 @@
             [parameters setObject:moods forKey:@"moods"];
         }
         
-        [parameters setObject:[NSNumber numberWithBool:discovery ] forKey:@"discovery"];
-        [parameters setObject:[NSNumber numberWithBool:own ] forKey:@"own"];
+        [parameters setObject:@"true" forKey:@"discovery"];
+        [parameters setObject:@"true" forKey:@"own"];
         
         [manager GET:[NSString stringWithFormat:@"%@/radio", self.humm.endPoint]
           parameters:parameters
@@ -127,8 +128,7 @@
         
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
-        
-        [parameters setObject:[NSNumber numberWithBool:YES ] forKey:@"weekly"];
+        [parameters setObject:@"true" forKey:@"weekly"];
         
         [manager GET:[NSString stringWithFormat:@"%@/radio", self.humm.endPoint]
           parameters:parameters
