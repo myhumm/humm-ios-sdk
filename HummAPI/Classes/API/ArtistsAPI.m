@@ -67,7 +67,7 @@
              success:^(AFHTTPRequestOperation *operation, id responseObject) {
                  
                  [self setNetworkActivityIndicatorVisible:NO];
-
+                 
                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                  {
                      NSError* err = nil;
@@ -80,7 +80,7 @@
                  
              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
                  [self setNetworkActivityIndicatorVisible:NO];
-
+                 
                  NSLog(@"error = %@", [e localizedDescription]);
                  error(e);
              }];
@@ -113,7 +113,7 @@
            parameters:nil
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   [self setNetworkActivityIndicatorVisible:NO];
-
+                  
                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
                   {
                       NSError* err = nil;
@@ -385,7 +385,7 @@
               limit:(NSInteger) limit
              offset:(NSInteger) offset
            songType:(NSString *) songType
-           live:(BOOL) live
+               live:(BOOL) live
             success:(void (^) (NSArray<Song *> *response)) success
               error:(void (^) (NSError *error)) error
 {
@@ -415,7 +415,14 @@
             [parameters setObject:songType forKey:@"songtype"];
         }
         
-        [parameters setObject:[NSNumber numberWithBool:live] forKey:@"live"];
+        if (live)
+        {
+            [parameters setObject:@"true" forKey:@"live"];
+        }
+        else {
+            [parameters setObject:@"true" forKey:@"live"];
+        }
+        
         
         
         [manager GET:[NSString stringWithFormat:@"%@/artists/%@/topsongs", self.humm.endPoint, idArtist]

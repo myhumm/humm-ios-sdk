@@ -59,7 +59,14 @@
             [parameters setObject:title forKey:@"title"];
         }
         
-        [parameters setObject:[NSNumber numberWithBool:private] forKey:@"private"];
+        if (private)
+        {
+            [parameters setObject:@"true" forKey:@"private"];
+        }
+        else {
+            [parameters setObject:@"false" forKey:@"private"];
+        }
+        
         
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
@@ -103,8 +110,8 @@
 
 
 -(void) deletePlaylistWithId:(NSString *) idPlaylist
-               success:(void (^) (PlaylistOwnerInt *response)) success
-                 error:(void (^) (NSError *error)) error
+                     success:(void (^) (PlaylistOwnerInt *response)) success
+                       error:(void (^) (NSError *error)) error
 {
     [self setNetworkActivityIndicatorVisible:YES];
     [self.humm updateUserToken:^{
@@ -118,31 +125,31 @@
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
         [manager DELETE:[NSString stringWithFormat:@"%@/playlists/%@", self.humm.endPoint, idPlaylist]
-           parameters:parameters
-              success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                  [self setNetworkActivityIndicatorVisible:NO];
-                  if ([@"ok" isEqualToString:responseObject[@"status_response"]])
-                  {
-                      
-                      NSError *err;
-                      PlaylistOwnerInt *playlist = [[PlaylistOwnerInt alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
-                      
-                      if (err)
-                      {
-                          error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
-                      }
-                      
-                      success(playlist);
-                  }
-                  else {
-                      error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
-                  }
-                  
-              } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
-                  [self setNetworkActivityIndicatorVisible:NO];
-                  NSLog(@"error = %@", [e localizedDescription]);
-                  error(e);
-              }];
+             parameters:parameters
+                success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    [self setNetworkActivityIndicatorVisible:NO];
+                    if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                    {
+                        
+                        NSError *err;
+                        PlaylistOwnerInt *playlist = [[PlaylistOwnerInt alloc] initWithDictionary:responseObject[@"data_response"] error:&err];
+                        
+                        if (err)
+                        {
+                            error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:nil]);
+                        }
+                        
+                        success(playlist);
+                    }
+                    else {
+                        error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                    }
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                    [self setNetworkActivityIndicatorVisible:NO];
+                    NSLog(@"error = %@", [e localizedDescription]);
+                    error(e);
+                }];
         
     } onUpdatedError:^(NSError *e) {
         [self setNetworkActivityIndicatorVisible:NO];
@@ -150,7 +157,7 @@
         error(e);
         
     }];
-
+    
 }
 
 
@@ -320,7 +327,15 @@
         [parameters setObject:description forKey:@"description"];
     }
     [parameters setObject:title forKey:@"title"];
-    [parameters setObject:[NSNumber numberWithBool:private] forKey:@"private"];
+    
+    if (private)
+    {
+        [parameters setObject:@"true" forKey:@"private"];
+        
+    }
+    else {
+        [parameters setObject:@"true" forKey:@"private"];
+    }
     
     [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
     
@@ -1019,7 +1034,13 @@
             [parameters setObject:[NSNumber numberWithInteger:offset] forKey:@"offset"];
         }
         
-        [parameters setObject:[NSNumber numberWithBool:album] forKey:@"album"];
+        if (album)
+        {
+            [parameters setObject:@"true" forKey:@"album"];
+        }
+        else {
+            [parameters setObject:@"false" forKey:@"album"];
+        }
         
         [manager GET:[NSString stringWithFormat:@"%@/playlists", self.humm.endPoint]
           parameters:parameters
