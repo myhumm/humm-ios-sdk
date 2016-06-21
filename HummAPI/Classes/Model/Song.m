@@ -60,6 +60,16 @@
     
 }
 
+-(NSString *) getArtistId{
+    if (self.artists && [self.artists firstObject])
+    {
+        return [self.artists firstObject][@"_id"];
+    }
+    return nil;
+    
+}
+
+
 -(NSString *) getYoutubeVideoImage
 {
     return [NSString stringWithFormat:@"http://img.youtube.com/vi/%@/0.jpg", self.getYoutubeId];

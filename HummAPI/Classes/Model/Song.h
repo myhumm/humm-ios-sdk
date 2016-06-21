@@ -33,5 +33,6 @@
 -(NSString *) getArtistName;
 -(NSString *) getYoutubeVideoImage;
 -(NSString *) getPlaylistCover;
+-(NSString *) getArtistId;
 
 @end
