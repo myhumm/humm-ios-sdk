@@ -1177,9 +1177,11 @@
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
         //        NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint];
+//        NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services?service=%@&sid=%@&token=%@&uname=%@&secret=%@", self.humm.endPoint, serviceName, serviceId, serviceToken, serviceUsername, serviceUsername];
+        
         NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services?service=%@&sid=%@&token=%@&uname=%@&secret=%@", self.humm.endPoint, serviceName, serviceId, serviceToken, serviceUsername, serviceUsername];
         
-        [manager POST:url
+        [manager POST:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
            parameters:parameters
               success:^(AFHTTPRequestOperation *operation, id responseObject) {
                   [self setNetworkActivityIndicatorVisible:NO];
