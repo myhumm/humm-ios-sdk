@@ -63,7 +63,7 @@
 -(NSString *) getArtistId{
     if (self.artists && [self.artists firstObject])
     {
-        return [self.artists firstObject][@"_id"];
+        return [self.artists firstObject][@"uid"];
     }
     return nil;
     
