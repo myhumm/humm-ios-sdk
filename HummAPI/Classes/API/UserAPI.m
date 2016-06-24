@@ -1177,7 +1177,7 @@
         [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token ]forHTTPHeaderField:@"Authorization"];
         
         //        NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services", self.humm.endPoint];
-//        NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services?service=%@&sid=%@&token=%@&uname=%@&secret=%@", self.humm.endPoint, serviceName, serviceId, serviceToken, serviceUsername, serviceUsername];
+        //        NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services?service=%@&sid=%@&token=%@&uname=%@&secret=%@", self.humm.endPoint, serviceName, serviceId, serviceToken, serviceUsername, serviceUsername];
         
         NSString *url = [NSString stringWithFormat:@"%@/user/me/settings/services?service=%@&sid=%@&token=%@&uname=%@&secret=%@", self.humm.endPoint, serviceName, serviceId, serviceToken, serviceUsername, serviceUsername];
         
@@ -1333,5 +1333,64 @@
     }];
     
 }
+
+-(void) putLang:(NSString *) lang
+        success:(void (^) (LoginInfo * response)) success
+          error:(void (^) (NSError *error)) error
+{
+    [self setNetworkActivityIndicatorVisible:YES];
+    [self.humm updateUserToken:^{
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        manager.responseSerializer =[AFJSONResponseSerializer serializer];
+        
+        NSMutableDictionary *parameters = [[NSMutableDictionary alloc]init];
+        
+        if (!lang)
+        {
+            error([NSError errorWithDomain:@"lang cant be null" code:100 userInfo:nil]);
+        }
+        
+        NSDictionary *account = @{
+                                  @"account" : @{@"lang": lang},
+                                  };
+        
+        //        [parameters setObject:@"preferences", genres];
+        [parameters setObject:@{@"lang": lang} forKey:@"account"];
+        
+        [manager.requestSerializer setValue:[NSString stringWithFormat:@"%@", self.humm.token]
+                         forHTTPHeaderField:@"Authorization"];
+        
+        
+        [manager PATCH:[NSString stringWithFormat:@"%@/users/me/settings", self.humm.endPoint]
+            parameters:parameters
+               success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                   [self setNetworkActivityIndicatorVisible:NO];
+                   if ([@"ok" isEqualToString:responseObject[@"status_response"]])
+                   {
+                       LoginInfo * settings = responseObject[@"data_response"];
+                       success(settings);
+                       
+                   }
+                   else {
+                       error([NSError errorWithDomain:@"hummDomain" code:100 userInfo:responseObject[@"data_response"]]);
+                   }
+                   
+               } failure:^(AFHTTPRequestOperation *operation, NSError *e) {
+                   [self setNetworkActivityIndicatorVisible:NO];
+                   NSLog(@"error = %@", [e localizedDescription]);
+                   error(e);
+               }];
+        
+    } onUpdatedError:^(NSError *e) {
+        [self setNetworkActivityIndicatorVisible:NO];
+        NSLog(@"error = %@", [e localizedDescription]);
+        error(e);
+        
+    }];
+    
+}
+
 
 @end

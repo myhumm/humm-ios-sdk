@@ -131,4 +131,8 @@
           success:(void (^) (LoginInfo * response)) success
             error:(void (^) (NSError *error)) error;
 
+-(void) putLang:(NSString *) lang
+        success:(void (^) (LoginInfo * response)) success
+          error:(void (^) (NSError *error)) error;
+
 @end
